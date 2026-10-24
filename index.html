@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Test Attempts Report – Metropolitan International Indian Private School, Umm Al Quwain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --band:#1B4F9C; --band-ink:#FFFFFF; --band-muted:#C9CCF0;
+  --bg:#F4F5FA; --surface:#FFFFFF; --ink:#1B2036; --muted:#646B82; --faint:#8D93A7; --line:#E4E6EF; --soft:#F7F8FC;
+  --accent:#1B4F9C; --accent-soft:#ECEDF9;
+  --took:#13805B; --took-soft:#E6F4EE; --not:#C2453D; --not-soft:#FBECEA; --track:#E7E9F1;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --shadow:0 1px 2px rgba(27,32,54,.04),0 8px 24px -12px rgba(27,32,54,.12);
+  color-scheme:light only;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:120px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1160px;margin:0 auto;padding-left:24px;padding-right:24px}
+[hidden]{display:none !important}
+
+/* ---------- header band ---------- */
+.band{background:var(--band);color:var(--band-ink);padding:22px 0 64px}
+.band .wrap{display:flex;align-items:center;gap:22px}
+.logo{background:#fff;border-radius:14px;display:grid;place-items:center;flex:none;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.logo img{display:block;width:auto}
+.logo.school{padding:6px}
+.logo.school img{height:74px}
+.logo.edu{padding:10px 14px;margin-left:auto}
+.logo.edu img{height:40px}
+.title h1{margin:0;font-family:var(--serif);font-weight:600;font-size:34px;line-height:1.1;letter-spacing:-.01em}
+.title p{margin:8px 0 0;color:var(--band-muted);font-size:14px}
+.title p span+span::before{content:"";display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.6;margin:0 10px;vertical-align:middle}
+@media (max-width:760px){
+  .band{padding-bottom:56px}.band .wrap{flex-wrap:wrap;gap:14px}
+  .logo.school img{height:56px}.logo.edu{margin-left:0;order:3}.title h1{font-size:25px}
+}
+
+/* ---------- filter toolbar ---------- */
+main.wrap{padding-bottom:56px}
+.filters{margin-top:-40px;position:sticky;top:12px;z-index:10;background:var(--surface);border-radius:14px;box-shadow:0 10px 30px -10px rgba(27,32,54,.28),0 0 0 1px var(--line);padding:16px 18px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,.95fr) minmax(0,1.15fr) minmax(0,1.6fr) minmax(0,.9fr) minmax(0,1.4fr);gap:12px 14px;align-items:end}
+.filters .actions{grid-column:1/-1;justify-self:start}
+@media (max-width:1040px){.filters{grid-template-columns:repeat(3,minmax(0,1fr))}.filters .f-chap,.filters .f-test{grid-column:span 2}}
+@media (max-width:720px){.filters{grid-template-columns:1fr 1fr}.filters .f-chap,.filters .f-test{grid-column:1/-1}}
+@media (max-width:980px){.filters{grid-template-columns:1fr 1fr;position:relative;top:0}.filters .f-test,.filters .actions{grid-column:1/-1}}
+.filters label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin:0 0 6px 2px;letter-spacing:.01em}
+select{width:100%;appearance:none;-webkit-appearance:none;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23646B82' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;border:1px solid var(--line);border-radius:10px;padding:10px 34px 10px 12px;cursor:pointer;text-overflow:ellipsis;font-weight:500;transition:border-color .15s,background-color .15s}
+select:hover{border-color:var(--accent)}
+select:disabled{opacity:.55;cursor:not-allowed}
+.actions{display:flex}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:0;background:var(--accent);color:#fff;border-radius:10px;padding:11px 18px;cursor:pointer;font-weight:600;white-space:nowrap;width:100%;transition:filter .15s,transform .05s}
+.btn:hover{filter:brightness(1.1)}.btn:active{transform:translateY(1px)}
+.btn svg{width:17px;height:17px;flex:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:11px 18px;border-radius:10px;font-size:14px;z-index:50;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+
+/* ---------- blocks ---------- */
+.block{scroll-margin-top:120px;background:var(--surface);border-radius:16px;box-shadow:var(--shadow),0 0 0 1px var(--line);padding:26px 28px;margin-top:22px}
+@media (max-width:640px){.block{padding:20px 16px}}
+.bh{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.bh h2{margin:0;font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.2;letter-spacing:-.005em;display:flex;align-items:baseline;gap:12px}
+.bh h2::before{content:attr(data-n);font-family:var(--sans);font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;min-width:26px;height:26px;display:inline-grid;place-items:center;transform:translateY(-3px)}
+.bh p{margin:4px 0 0 38px;color:var(--muted);font-size:14px}
+.count{font-family:var(--sans);font-size:13px;font-weight:700;padding:3px 10px;border-radius:999px;transform:translateY(-3px)}
+#chTook{background:var(--took-soft);color:var(--took)}#chUnl{background:var(--soft);color:var(--muted);box-shadow:0 0 0 1px var(--line)}#chNot{background:var(--not-soft);color:var(--not)}
+.search{border:1px solid var(--line);border-radius:10px;padding:9px 12px 9px 34px;background:var(--soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%238D93A7' stroke-width='1.7'%3E%3Ccircle cx='6' cy='6' r='4.8'/%3E%3Cpath d='M9.6 9.6L13 13' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat 12px center;width:240px;max-width:100%}
+.search:focus{outline:none;border-color:var(--accent);background-color:var(--surface)}
+
+/* ---------- summary ---------- */
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:2px;font-size:13.5px;margin:-6px 0 20px 32px}
+.crumbs button{border:0;background:none;padding:4px 8px;border-radius:8px;cursor:pointer;color:var(--accent);font-weight:600}
+.crumbs button:hover{background:var(--accent-soft)}
+.crumbs span.cur{padding:4px 8px;font-weight:600;color:var(--ink)}
+.crumbs i{color:var(--faint);font-style:normal;padding:0 2px}
+.sumgrid{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:center}
+@media (max-width:760px){.sumgrid{grid-template-columns:1fr}}
+.ring{position:relative;width:200px;height:200px;margin:0 auto}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .trk{stroke:var(--track)}
+.ring .val{stroke:var(--accent);transition:stroke-dasharray .5s ease}
+@media (prefers-reduced-motion:reduce){.ring .val{transition:none}}
+.ringtxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 34px}
+.ringtxt b{font-family:var(--serif);font-weight:600;font-size:46px;line-height:1;letter-spacing:-.02em}
+.ringtxt span{font-size:12.5px;font-weight:600;color:var(--muted);margin-top:8px;line-height:1.3}
+.ringcap{position:absolute;left:-20px;right:-20px;top:calc(100% + 10px);text-align:center;font-size:12px;color:var(--faint)}
+.ring{margin-bottom:28px}
+.stats{display:grid;gap:10px}
+.stat{display:grid;grid-template-columns:6px 1fr auto 18px;align-items:center;gap:16px;width:100%;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:14px 18px 14px 0;cursor:pointer;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.stat::before{content:"";align-self:stretch;margin:-14px 0;background:var(--faint)}
+.stat.t::before{background:var(--took)}.stat.n::before{background:var(--not)}
+.stat:hover{border-color:var(--accent);box-shadow:0 4px 14px -6px rgba(58,63,158,.35)}
+.stat .k{font-weight:600;font-size:15px}
+.stat .k small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);margin-top:1px}
+.stat b{font-family:var(--serif);font-weight:600;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.stat.t b{color:var(--took)}.stat.n b{color:var(--not)}
+.stat .chev{color:var(--faint);font-size:20px;line-height:1}
+.def{font-size:13px;color:var(--muted);margin:18px 0 0;padding-top:14px;border-top:1px dashed var(--line)}
+.def:empty{display:none}
+
+.xnote{display:flex;align-items:center;gap:14px;margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--accent-soft);color:var(--ink)}
+.xnote svg{width:22px;height:22px;flex:none;color:var(--accent)}
+.xnote div{flex:1;min-width:0}
+.xnote b{display:block;font-weight:600;font-size:14.5px}
+.xnote span{display:block;font-size:13px;color:var(--muted)}
+.xnote button{flex:none;border:0;background:var(--surface);color:var(--accent);font-weight:600;font-size:13.5px;padding:8px 14px;border-radius:9px;cursor:pointer;box-shadow:0 0 0 1px var(--line)}
+.xnote button:hover{box-shadow:0 0 0 1px var(--accent)}
+@media (max-width:600px){.xnote{flex-wrap:wrap}.xnote button{width:100%}}
+.xrow{padding:14px 0;border-bottom:1px solid var(--line)}
+.xrow:last-child{border-bottom:0}
+.xrow .who{display:flex;justify-content:space-between;gap:12px;font-weight:600}
+.xrow .who span{font-weight:400;color:var(--muted);font-size:13px}
+.xrow .what{font-size:13.5px;color:var(--muted);margin:3px 0 8px}
+.xrow .atts{display:flex;flex-wrap:wrap;gap:8px}
+tr.unnamed td{background:var(--soft);color:var(--muted);font-size:13.5px;font-style:italic;white-space:normal}
+.unnamed-note{margin-top:10px;padding:12px 14px;border-radius:10px;background:var(--soft);color:var(--muted);font-size:13.5px}
+/* ---------- tables ---------- */
+.tbl{overflow:auto;max-height:560px;border-radius:12px;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{position:sticky;top:0;z-index:1;background:var(--soft);font-size:12px;font-weight:600;color:var(--muted);text-align:left;padding:11px 16px;border-bottom:1px solid var(--line);white-space:nowrap;letter-spacing:.01em}
+td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:14.5px;vertical-align:middle;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+.r{text-align:right}.c{text-align:center}
+.idx{color:var(--faint);width:48px;font-size:13px}
+.wrapcell{white-space:normal;min-width:200px}
+.rowlink tbody tr:not(.grp){cursor:pointer;transition:background-color .12s}
+.rowlink tbody tr:not(.grp):hover td{background:var(--accent-soft)}
+.rowlink tr.on td{background:var(--accent-soft)}
+.go{color:var(--accent);font-weight:600;font-size:13px;opacity:.75}
+.rowlink tr:hover .go{opacity:1}
+.prog{display:flex;align-items:center;gap:12px;min-width:170px}
+.prog .m{flex:1;height:8px;border-radius:999px;overflow:hidden;background:var(--track);display:flex}
+.prog .m span{background:var(--accent);border-radius:999px}
+.prog em{font-style:normal;font-size:13.5px;font-weight:600;color:var(--ink);width:42px;text-align:right}
+.tn{color:var(--took);font-weight:600}.nn{color:var(--not);font-weight:600}
+td b{font-weight:600}
+tr.grp td{background:var(--soft);font-family:var(--serif);font-weight:600;font-size:16px;color:var(--ink);padding:10px 16px;border-bottom:1px solid var(--line)}
+.att{display:inline-flex;flex-direction:column;gap:2px;padding:6px 10px;border-radius:9px;background:var(--soft);border:1px solid var(--line);min-width:108px}
+.att b{font-size:15px;font-weight:700;color:var(--ink)}
+.att small{color:var(--muted);font-size:12px;line-height:1.3}
+td.na{color:var(--faint)}
+td.att-td{vertical-align:top}
+.note{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+.note.warn{color:var(--not)}
+.empty td{color:var(--muted);text-align:center;padding:30px;white-space:normal}
+
+/* ---------- pop-up ---------- */
+dialog{border:0;padding:0;border-radius:18px;width:min(640px,calc(100vw - 24px));max-height:min(86vh,760px);background:var(--surface);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.32)}
+dialog::backdrop{background:rgba(14,17,32,.55);backdrop-filter:blur(2px)}
+dialog[open]{display:flex;flex-direction:column}
+@media (prefers-reduced-motion:no-preference){dialog[open]{animation:pop .18s ease-out}@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.985)}}}
+.mh{padding:22px 24px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+.mh h3{margin:0;font-family:var(--serif);font-weight:600;font-size:21px}
+.mh p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.x{border:0;background:var(--soft);cursor:pointer;width:34px;height:34px;border-radius:10px;font-size:20px;color:var(--muted);flex:none}
+.x:hover{color:var(--ink)}
+.mb{overflow:auto;padding:0 24px 18px}
+.mb .search{width:100%;margin:14px 0 6px}
+.stu{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.stu:last-child{border-bottom:0}
+.stu div{font-weight:500}
+.stu span{color:var(--muted);font-size:13px;text-align:right}
+.mempty{color:var(--muted);text-align:center;padding:26px}
+
+/* ---------- achiever level (HA / MA / LA) ---------- */
+.lvl{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;letter-spacing:.03em;
+  padding:2px 9px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.lvl::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.lvl.High{color:var(--took);background:var(--took-soft);border-color:rgba(19,128,91,.22)}
+.lvl.Middle{color:#A06A00;background:#FFF6E0;border-color:rgba(160,106,0,.22)}
+.lvl.Low{color:var(--not);background:var(--not-soft);border-color:rgba(194,69,61,.22)}
+.lvl.none{color:var(--faint);background:var(--soft);border-color:var(--line);font-weight:600}
+td .lvl{margin-top:2px}
+td.chapcell{color:var(--muted);font-size:13px}
+
+/* ---------- chapter-scoped summary ---------- */
+.crumbs.solo{margin:0 0 18px 32px}
+.note{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);
+  border-radius:14px;padding:16px 18px;margin:0 0 22px}
+.note svg{width:20px;height:20px;flex:none;color:var(--accent);margin-top:1px}
+.note b{display:block;font-size:14.5px;margin-bottom:3px}
+.note span{font-size:13.5px;color:var(--muted);line-height:1.55}
+
+/* ---------- role filter and teacher views ---------- */
+/* the filter card is designed to tuck up into the band, so the role bar takes that job
+   instead and the filters drop back to a normal flow position beneath it */
+main.wrap > .rolebar{margin-top:-40px;margin-bottom:14px;position:relative;z-index:11;
+  background:var(--surface);border-radius:14px;padding:14px 18px;
+  box-shadow:0 10px 30px -10px rgba(27,32,54,.28),0 0 0 1px var(--line)}
+main.wrap > .filters{margin-top:0}
+@media (max-width:980px){main.wrap > .rolebar{margin-top:-30px}}
+.rolebar,.subbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:0 0 18px}
+.rolebar b,.subbar b{font-size:13px;color:var(--muted);font-weight:600}
+.seg{display:inline-flex;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;padding:8px 20px;border-radius:999px;cursor:pointer;
+  font:inherit;font-size:14px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.rolebar span.hint,.subbar span.hint{font-size:12.5px;color:var(--faint)}
+.bd{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;
+  padding:2px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;color:var(--ink)}
+.bd::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
+.tnote{display:flex;gap:12px;align-items:flex-start;background:var(--soft);border:1px solid var(--line);
+  border-radius:14px;padding:16px 18px;margin:0 0 22px}
+.tnote svg{width:20px;height:20px;flex:none;color:var(--accent);margin-top:1px}
+.tnote b{display:block;font-size:14.5px;margin-bottom:3px}
+.tnote span{font-size:13.5px;color:var(--muted);line-height:1.55}
+.tq{width:100%;max-width:330px;padding:9px 13px;border:1px solid var(--line);border-radius:10px;
+  font:inherit;font-size:14px;margin-bottom:14px;background:var(--card);color:var(--ink)}
+.tfig svg{display:block;width:100%;height:auto;overflow:visible}
+/* the template's own progress bar is a fixed accent colour; these need a per-band colour */
+.bar{display:flex;align-items:center;gap:12px;min-width:150px}
+.bar .trk{flex:1;height:8px;border-radius:999px;overflow:hidden;background:var(--track)}
+.bar .val{height:100%;border-radius:999px;background:var(--accent)}
+.bar b{font-size:13.5px;font-weight:600;color:var(--ink);width:42px;text-align:right}
+/* the template stacks its three summary tiles beside a ring; these four stand alone */
+.tstats{grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
+.tstats .stat{grid-template-columns:6px 1fr;cursor:default;padding:14px 18px 14px 0;align-content:center}
+.tstats .stat b{font-size:26px;margin-top:6px;white-space:nowrap}
+.tstats .stat .k{padding-right:14px}
+</style>
+</head>
+<body>
+<header class="band">
+  <div class="wrap">
+    <div class="title">
+      <h1>Test Attempts Report</h1>
+      <p><span>Metropolitan International Indian Private School, Umm Al Quwain</span><span>Academic year 2026–27</span><span>Data as of <span id="asOf"></span></span></p>
+    </div>
+    <div class="logo edu"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH4AAAAqCAYAAAB1PO9pAAASt0lEQVR42u2ce3RU9bXHP2cembwzIYGEPEhCEoSAvB+CBC+mUrTYKnDxAS2KxVqWQpdSdKm1uq4WS9V7rVVQY3tBtOjijQ+eQiDlHRIgCYEk5DmZvCaTSTLvmXPuHxMOGWbyolXb2+y1slYyc87vnN/vu3977+93/0CQJEliwP7tTDGwBAPAD9gA8AM2APyADQA/YAPAD9gA8AM2APwNJooiVVUNuN3iwEr/OwG/f/8Znn76HTZt2ocoDoD/XZjdbqesrAyn0/n9AF9f38LmzfsxGtv5/PNDFBZWDKDyLduZM2dYsGABq1evZvHixZSWln73wG/cuBe93oAgwMMP38Wtt6YOIPMtWmtrK5s3b2b58uWkpaUxc+ZMPvjgg+8OeEmSOHIkn337TiFJEmlpCcybNwNBGADn2wY+KSkJlUpFRUUFKSkplJWVfXfANzS0kJ39hWdwhYIVK+YTGRk2gMzfYY2NRo4cycdstnV7TVRUFAUFBWi1WhYtWoTdbic5Obnb61X/6Cr+008PUlfXjEKh4Kc/ncO4cak+11itDvrSFAwK0qBU9s03V616G4vFTmzsIFavfoiIiJCbmsOxYxfYtGmvz+eRkaFkZo5jxowxREVF9HvcCxfKKSgoZcmSOSgU/dtvpaW1vPfeDt56K4GQkEC/14SFhbFixQo2bNjAtGnTKCoqYuXKlf8A4CUJqd2EaGpB0AQiaKMQAjRel+zbd5qvvjoJwLBhMdx3X6bPMDpdM2+8sQWLxdZz1akQeOaZBxkxIrFPr3f1ah1msw2Hw4nb7b5p521rM6PTNXHHHeO9PrdY7GzYsItvvjnHSy890u8oduzYeXbtymXRojsJDAzod/rsi912221kZGSg1+tZvHgx4eHhNwm86MZ19QqOo3uxHdyF2NwgfyWo1KgnziBw7nxUGRMxCRo+//ywTNsMBhPl5TomTrzFa0iHw0lFRR0dHdYeHy0IAjab43sJrSEhQTz77GKfz3NyCnjttU0UFl4lM3Ncv8ZctuxHLFz4H/0Gvb8WHh7eI+C9Ai+2tWLJfhP7iUNIJqOvF7qcOE7n4MjLRRk3DOXdi/jxvOn86b2dSJJEe7uFdes+Zf361d3ujvT0BIYPj+sW+O+rNuhuh82aNY7s7EEUFJT1CLzD4USvNzB4cCTBwRo5bQUFafxe73aL1NQ0AhAbO8jHOb6NszJ+gXdVldGx7jlcpUVdYy9CSBiCJhCcTsR2E4hucLtx11Qg/uW/mfvYM4SteYi33t6KzeagsbGVP/1pG889twS12vdRmZnjWLJkTp9f1uVyU1mpp7S0lpKSarTa0C7OI9yYmTh6tICmJhMAWVkTvRzJbneQk3OetjYLkZGhZGVN8qpD/DlDVVUDer2BIUMivb7bti2HHTuO8vTTD3Dw4FkOH87HbncQEhLIU08tZM6cKaxfv4MLF66yfv0znc+QuHpVx5Ythzh5slh2GICMjGTuv38WM2feilKpxIO70C0zcjicfPbZYbZuPcxjj83j3ntv75VF+aDhbtDR/uqvcFeVez5QKtHcfheBcxcgRA3pBN6Bu6ke+6EvsB/eA6KI5HRgzn6DqT99ioUL7mDzJwcAOH36EpWVetLTE/8uD7XZHJ05Ns8rTSgUAlFREVit9huhYseOo1y44JnHhAlpXsBbLHb++tcDVFU1kJYW7wW8xWLj3Xe330CXOrh4sZyIiBCmTBnph06187vffYxGo2blygUMHhxJbu4FVKprhZyAKF7fuZWVep5//kOSk2N4+eVlhIcH43C4qK83cPlyNceOnef222/t1hG7gv7eezv45ptzrFy5kKysSX2izqobSm7MH/5BBl0I0xKyfDWBc+6HGypRZVIaAZNnEnjvg3T8z29wV5aBy4lr+1/42dqPOHGymPJyHWazja++OsWqVTcPvChKZGfvYc+ev8lhT6sNQ6NR0dFhpamptfeJqpQ9VRRefzmdbvbtO+3zDjabHZVKyZkzJSQmDvGKYhaLndDQYN5880liYwcBMHnyLV6pS5KuA3j4cD4RESGsXfuEF3MZMyaFH/xgsk/08oAp+GyGjz/ex8GDZ3nkkbs7QRf6H+odebk4cj07VQgJI+yZVwmYkdXjAOqM8UT81wZMLzyOu/oqosmIdefHLFu2mN/+9iNcLjf795/m5z+f50NFTp0qxmTq8Dvugw9mybTp4sVydu/2gK7RqHnoobu4445xBASoMZnMHD9+kU8+OdBjLuwJ+BvXKihIw1tvPeUT6ltb29mz5zjZ2V9gNlt59NF75IUWBIHly++VQe/Oga9Ze7sZURRxu8U+UFbJTwS08/bbW8nJKeDJJxdw993T+gy6N/AuF9ZtG6EzrATOXUDA9DuvP7rdhP3oXpznjiNZzKhGjUeTNQ9lfDKKmHhCn/otbS+tQLKasR/YSercxcTGDqK2tgmr1c7p08XMnj3R6+FFRRUUFfnX8O+++zYZ+L17T+NyuTs/n97JhT2THDo0ipEjh7F165EeWYBK1XfmqlQqSEuL9/vdyJFJvPDCB+zbd5q5c6cRFxeNKIpyvdETS+nqmLNmjefAgbM8/fQ7LFkyh7i4aKKjtXIxeOOO7+qgZrOVDz/cw/79Z3jggTuZO3dqv0D3Al5saUSsq/bkzTAtwUtWyE8S21ppf2kFzssXoJMjO/KOYzuwg7BnXkM9/jZUo8ajGnkrzvyTIEkE5x8hIWEItbVNABQUlPkA31dRqL7eIP89f/4sGfQbF7Y3MG/cwV13YF8tLCyYH/94Jq+/vhmdrrkTeAmNJgCNRt1jVOmaq8eOTeXZZxfz/vu7+M1vsomICCE6WsuwYTH88IdTmTTpFr9VfUeHhXXr/srx44UIgifHCzehh18HvtWIaGrxhO/pdyKEhF3jGpjfew1ncb5P+BEb6uhYv5aIP2xEEa5FM3OOB3jAXZTHyFH/ycmTHmZQXd3gE4qXLftRr1W9JHkvWHc8uLfJ33gmQJIkbpYlZWSkIIoSLS1tsnMqFEKvilzX56lUSmbNGsf06aMpLa2luLiS/PxSLl2q4vDhfBYtms3SpXMJCFAjSRKCAG1tFjZu3EtBQSlPPPETmppaOXjwLHPnTiMtLeHmgJecdiSHJ1Qq44dd33HNDbiKC7rfkboqxNoKFBkTUCanX5+k2Ux0RFAX+uSU6Up/TKlUMHjwdfp08mQR8+bN6PU+QRC8nKS+3kBMTOQNIEg35UR2u2edAgLUMvCCIPR6n7/qXK1WkZGRTEZGMvPnz6KlpY09e47z2WeHmDAhncmTRyJJ0NFhY926TzGZOnjhhZ8xdeoobDYHRUUVfPTRl6xd+4t+ravCayU6XVLo4rmS1YxkNXfvxQ47bn2t577AoC6k24lGKXhN+mZCK8D06aPl3zdt2kde3mXsdqe8kysq6vzKtMOGxcq/X6OBkiTR0WFFr2+Wx+ivuHPs2HkCAwMYOjSq8x2kXinUjTnev0ytIDpay6OP3kNERCjl5XXyMy0WGzabnVdeWca0aRkIgkBQkIZf/vI+Cguv8uWXJ/ol9Mg7XgjQIGg0SFYL7oa661cEaECt6WlGCOFaD7iN+i73BWBos3mFthsr66+/Pkle3uVuhx46NIo1ax4mM3MsI0YkcuVKDc3Nrbz88p9JTIxBo1HjdovU1jb6BXHGjNFs3XpY7iNculRFcHAgFosNg6ENo7G938pYcXEVu3f/jfj4wcTHR3feL/YosFwH3rvjptWGylGjq126VElbm1lmCJIkERkZxosvLiUjw7vjdsstw5g9eyJbthxi8uSRXlGtb8AHhyIEhyJZLTjOHgOXE1RqFJFRKIcmIDbX+59QcCiSsRnn+dPY/3bweogemkhtw3V+rdWG+qh3er0Bvd7QY8PkWkh99tnFvPLKX6iubsBstlFSUuW1qP521Pjx6cyePYGjR8/jcLgoK9N5CT8KheA3Ctlsdn7/+0/8hHgnJ04UERQUwCOP3ENYWLAcdfzx7J6Kuzff/Izq6gamTBlJSspQkpJiEQSB4uJKtm3LISkpllGjkuR6SqNRM2hQuF+a+sQT9/H44+vYvTuX5cvv7R/wisGxKIYMRTQ0ItbrsB3c7VHrgkIIeXwNpjWP+g35krmd9jee95VXJ8zk8vbrR3+uTSIgQE1KSlyv3TlA3lEAyclDWbv2F5w4UciRIwVcvlyNy+Vm+PA47r13BgcOnMVmcxAbOwil8npk+dWvFpGWlsD27TkYDG1otaGMGJHIzJljyc29gMHQRmJiTJcmRwiJiTFeTtLebqGjw0Jy8lDuu28mWVmTSU2N95KSezdvJ1u1aiFVVfXk5l5g27Yj1NcbEUWR+PhoHnooi8zMsbI0LIr0WIgGB2tYtWohr732MZMm3cLEiSN6f5uu/1rWuusTzO++2lngJRHx+kcoYjwTdJUWYV6/Fnd9LZLN2uObKCKjMD63ntXPfUhrawcKhcAHH6zptiEzYD1bR4cVURQJDw/p9TqHw+k3MvQIvGS30bryAdwVV0AQUI+dStjzb6CI7Mxllg7EVkOvwAsh4fx5zzm2bDmIJMHo0Sn88Y+rvKrewsIKdLpGpk8f43dCer0BtVpFdLTvoQeLxUZRUQVTpoy6qYW0Wu3odE39pkDXZFKDoY2oqHBqahp7FG36Yk6ni/z8K0ydmtHjdRUVeiIjw9BqQ/8hzuRFPAVNIKErXkAIDQdJwnn+FKaVD2I/uhd3fS0goIxJQJmQgiI6BiE4FFXqKJ+fOqea7dtzkCQPHZs/f5YMuihK7Nx5DKOxjeHD4+W8b7HYqKtrlsOmwWCS5Vyn00VdXbPciLHZHBQUlFJZWY/T6ZKbFc3NJvl4Un29gbq6Znlux46d58SJQvkdrhV2DoeTpqZWamoa5RzsdotUVdWj0zX58P+2NjOFhVdlfeKaIzU3XxtD8mq1Njeb5HTQ3m7Bbndisdiw253Y7U6cThdFRZVe49fXG+RxnE4XVVX1lJRUyc0pu91JRYXea35ms2f9+noIxUdxUI+ZROgvn0folDjdDTraX/81ptVLMf36Z5h+vdTzs3op1q3/67cge/PNLXKVnZg4hAkTRnhp1FarnczMcaSnJ8g96h07jmI0tvP116d8xty5M5f2dot8ugegqqoRo7GNzz47BEBtbROHDuV1ybsix48XUlPTIDderoFoszkoL9d1dsnqOXu2hOLiSlll3LUrl7o6Axs3fu1XBr54sZwrV2pITfWkrvJyHbt25XLqVDFXrtTIcrReb+D06WIaGozYbA6++eYc5eU6Dh48S0lJFQaDyUcf+OKL45SV6cjLK5F1i8ZGI5WV9TIt3rLlICZTB5s27ZPv3b49h5YW/+vXJ+BRKtHc9RPCX/8zquG3eMpRlwuxsQ5XaTHOwjxcl87jri5HPda7i2Q0tvPuuzvkVqhareKRR+7xCk8KhQKz2eZV4TqdLgoKyqitbfRp5DidLsrKaqms1HvJrqmpcYwfn05LSzuiKOJyuZkwIZ2QkEBEUWT//jOUltbS2OhhFoMHa4mLi5bpkcPhkn8fPjyO5ORYrFY7kuTpk0+blkFEhP+wmpoaT2RkmLybJclz1Cw9PQGdrkkOzampcaSkxNHa2kFoaBDNzSZ0uiYaGoxUVOh9cnFdXTNVVfWYTB2yClhd3cDIkUmMHp0iR0ZBEBg3Lk2mx3a7g4sXr6LTNXZ7Jq934IGCglI2HKlC8fwfCX3yRRTRMb43RkSi6qLUlZRU8+KLH3LgwBmZLj388A/IzBzrdV9oaBBjxqTw6acHeP/9XRiNbajVKlJShtLS0k5CwmAfupKenkB5uZ6EhCFyGC0pqSY7+wvS0uL9SqXFxRVeUq1KpeTIkfw+KX633Taa7Ow91NQ0+lXjgoMDmTVrHIcPn+t2nKSkGLZuzSEnJ1/m1unpCdTXGxk+PA6bzeEjP8fHD0ahUGAyWRg2zLPmCQlD2Lx5P+fOXQEkgoMDCQsL5uOP98npSqMJICkpBqOxQ16jfhV3nlBtYc2a97hypYa4uGiWLp3L2DHJBF8tRKWvRGw1gMuJIikN55QsmkxWvvzyBDt3HvMCKytrEitXLuz2uNE/s5nNVhoajOzde4oVK+7/p3s/o7GdxkYjeXmXefjhu25qDB/gd+/O5Z13tsk7xaOVa9FqQ9Fqw4iKiiAwUI3BYKK6uhGDwURbm0UWTwIDNSxfPo977pneY7fqXwH40NAgn2NW/yzAt7S0ER0d0W06uokdb2bDht0cP35RVs76Ymq1irS0BB577Ed9EhAG7Ps1wd9/d+Z2i1y9WseuXbl89dWJXhsL48enMX/+HYwfn0ZwcODAqv6rAt/VTCYz+flXKCqqxGhso73dSlhYEHFx0SQkDGHcuLQ+NwYG7F8I+AH7/2n/B//V9pZiBTsIAAAAAElFTkSuQmCC" alt="EduBrisk"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="rolebar">
+    <b>Role</b>
+    <div class="seg" role="group" aria-label="Role">
+      <button type="button" id="rStu" aria-pressed="true">Student</button>
+      <button type="button" id="rTea" aria-pressed="false">Teacher</button>
+    </div>
+    <span class="hint" id="roleHint"></span>
+  </div>
+
+  <div id="paneTeacher" hidden>
+    <div class="subbar">
+      <b>Source</b>
+      <div class="seg" role="group" aria-label="Teacher data source">
+        <button type="button" id="sEB" aria-pressed="true">EduBrisk usage</button>
+        <button type="button" id="sTS" aria-pressed="false">TeachScope</button>
+      </div>
+      <span class="hint" id="srcHint"></span>
+    </div>
+
+    <div id="paneEB">
+      <section class="block">
+        <div class="bh"><div><h2>Teacher accounts and usage</h2><p>Hours recorded on the EduBrisk platform, one row per teacher account.</p></div></div>
+        <div class="stats tstats">
+            <div class="stat"><span class="k">Teacher accounts<small>On the platform</small></span><b id="kTea"></b></div>
+            <div class="stat t"><span class="k">With recorded hours<small>Above zero</small></span><b id="kAct"></b></div>
+            <div class="stat n"><span class="k">No hours recorded<small>Includes accounts with no entry</small></span><b id="kIdle"></b></div>
+          <div class="stat"><span class="k">Total hours<small>Sum of all accounts</small></span><b id="kHrs"></b></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="bh"><div><h2>How teacher usage is spread</h2><p>Each account placed in a band by its recorded hours.</p></div></div>
+        <div class="tbl"><table>
+          <thead><tr><th>Recorded hours</th><th class="r">Teachers</th><th style="width:38%">Share of accounts</th></tr></thead>
+          <tbody id="tDist"></tbody>
+        </table></div>
+        <p class="def" id="defDist"></p>
+      </section>
+
+      <section class="block">
+        <div class="bh"><div><h2>Teachers</h2><p><span id="nTea"></span> accounts, most hours first.</p></div></div>
+        <input class="tq" id="qTea" type="search" placeholder="Search teachers…" aria-label="Search teachers">
+        <div class="tbl"><table>
+          <thead><tr><th class="idx">#</th><th>Teacher</th><th>Username</th><th class="r">Hours</th><th style="width:24%"></th></tr></thead>
+          <tbody id="tTea"></tbody>
+        </table></div>
+        <p class="def">Hours are decimal: 1.5 is one hour thirty minutes. An account with no entry is shown as
+          “not recorded” rather than as zero, because the two are not the same thing.</p>
+      </section>
+    </div>
+
+    <div id="paneTS" hidden>
+      <section class="tnote">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.1" fill="currentColor"/></svg>
+        <div><b id="tsHead">This is a baseline, not a verdict.</b><span id="tsNote"></span></div>
+      </section>
+
+      <section class="block">
+        <div class="bh"><div><h2>Lesson observation at a glance</h2><p id="tsSub"></p></div></div>
+        <div class="stats tstats">
+          <div class="stat"><span class="k">Teachers observed<small>On the platform</small></span><b id="kTsN"></b></div>
+          <div class="stat"><span class="k">Observations logged<small>Across all cycles</small></span><b id="kTsO"></b></div>
+          <div class="stat"><span class="k">School average<small>Latest observation each</small></span><b id="kTsA"></b></div>
+          <div class="stat t"><span class="k">At Very Good or above<small>80% and over</small></span><b id="kTsV"></b></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="bh"><div><h2>Where the staff sit</h2><p>Every observed teacher placed by their latest score.</p></div></div>
+        <figure class="tfig"><svg id="cBands" viewBox="0 0 860 92" role="img" aria-labelledby="bandT"><title id="bandT">Share of teachers in each band</title></svg></figure>
+        <div class="tbl" style="margin-top:14px"><table>
+          <thead><tr><th>Band</th><th>Range</th><th class="r">Teachers</th><th style="width:30%">Share of staff</th></tr></thead>
+          <tbody id="tTsBands"></tbody>
+        </table></div>
+      </section>
+
+      <section class="block">
+        <div class="bh"><div><h2>Strongest and weakest practice</h2><p>The 25 observed parameters, ranked by the share of teachers rated Good or above on each.</p></div></div>
+        <div class="tbl"><table>
+          <thead><tr><th>Parameter</th><th class="r">Good or above</th><th class="r">Weak</th><th style="width:28%">Share at Good or above</th></tr></thead>
+          <tbody id="tTsParam"></tbody>
+        </table></div>
+        <p class="def">These percentages count teachers at Good, Very Good or Outstanding on each parameter. That is a
+          different scale from the band table above, which places a teacher by their overall score. The two are not comparable.</p>
+      </section>
+
+      <section class="block">
+        <div class="bh"><div><h2>Teachers observed</h2><p><span id="nTsT"></span> teachers, highest score first.</p></div></div>
+        <input class="tq" id="qTs" type="search" placeholder="Search teachers…" aria-label="Search observed teachers">
+        <div class="tbl"><table>
+          <thead><tr><th class="idx">#</th><th>Teacher</th><th class="r">Observations</th><th class="r">Latest score</th><th>Band</th><th style="width:20%"></th></tr></thead>
+          <tbody id="tTsTea"></tbody>
+        </table></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="tnote" style="margin-bottom:0">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.1" fill="currentColor"/></svg>
+    <div><b>Where the achiever levels come from.</b><span>This school’s assessment export carries no internal total, so HA, MA and LA here are worked out from the UT-01 and UT-02 unit tests of 2026–27 instead, averaged per subject, at HA above 75 and LA below 50. Unit-test marks run much higher than a full internal total — English averages 91.6% — so on the average across all four subjects 62 of the 73 students land at HA and none at LA. The levels separate meaningfully only within Mathematics (36 HA, 25 MA, 5 LA). Read them as a position on these two tests, not as a judgement on the student.</span></div>
+  </section>
+
+  <section class="filters" aria-label="Report filters">
+    <div><label for="fGrade">Grade</label><select id="fGrade"></select></div>
+    <div><label for="fSection">Section</label><select id="fSection"></select></div>
+    <div><label for="fSubject">Subject</label><select id="fSubject"></select></div>
+    <div class="f-chap"><label for="fChapter">Chapter</label><select id="fChapter"></select></div>
+    <div><label for="fLevel">Achiever level</label><select id="fLevel"></select></div>
+    <div class="f-test"><label for="fTest">Test</label><select id="fTest"></select></div>
+    <div class="actions">
+      <button class="btn" id="dlBtn" type="button">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v7.5M4.8 7L8 10.2 11.2 7M3 13.5h10"/></svg>Download raw data
+      </button>
+    </div>
+  </section>
+
+  <nav class="crumbs solo" id="crumbs" aria-label="Report level"></nav>
+
+  <section class="note" id="noChap" hidden>
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.1" fill="currentColor"/></svg>
+    <div><b>Participation is shown one chapter at a time.</b><span id="noChapTxt"></span></div>
+  </section>
+
+  <section class="block" id="bSummary">
+    <div class="bh"><div><h2 id="hSummary">Summary</h2><p id="pSummary"></p></div></div>
+    <div class="sumgrid">
+      <div class="ring" role="img" aria-labelledby="kRateL">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="52" fill="none" stroke-width="11"/><circle class="val" id="ringVal" cx="60" cy="60" r="52" fill="none" stroke-width="11" stroke-linecap="round" stroke-dasharray="0 400"/></svg>
+        <div class="ringtxt"><b id="kRate"></b><span id="kRateL"></span></div>
+        <small class="ringcap" id="kRateH"></small>
+      </div>
+      <div class="stats">
+        <button class="stat" type="button" data-pop="all"><span class="k">Students on roll<small>View the full list</small></span><b id="kAll"></b><span class="chev">›</span></button>
+        <button class="stat t" type="button" data-pop="took"><span class="k"><span id="kTookL"></span><small id="kTookP"></small></span><b id="kTook"></b><span class="chev">›</span></button>
+        <button class="stat n" type="button" data-pop="not"><span class="k"><span id="kNotL"></span><small id="kNotP"></small></span><b id="kNot"></b><span class="chev">›</span></button>
+      </div>
+    </div>
+    <p class="def" id="def"></p>
+    <div class="xnote" id="xnote" hidden>
+      <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8.2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="10" cy="6.2" r="1.1" fill="currentColor"/></svg>
+      <div><b id="xtitle"></b><span>These attempts come from another grade's file and are not counted in this grade's figures.</span></div>
+      <button type="button" id="xbtn">View tests ›</button>
+    </div>
+  </section>
+
+  <section class="block" id="bSubjects">
+    <div class="bh"><div><h2>Subject-wise participation</h2><p>Click a subject to see its tests.</p></div></div>
+    <div class="tbl">
+      <table class="rowlink">
+        <thead><tr><th>Subject</th><th class="r">Chapters</th><th class="r">Tests</th><th class="r">Attempted at least one</th><th class="r">Attempted none</th><th></th></tr></thead>
+        <tbody id="tSubjects"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="bSections">
+    <div class="bh"><div><h2>Section-wise participation</h2><p id="pSections"></p></div></div>
+    <div class="tbl">
+      <table class="rowlink">
+        <thead><tr id="hdSections"></tr></thead>
+        <tbody id="tSections"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="bLevels">
+    <div class="bh"><div><h2>Achiever-level participation</h2><p id="pLevels"></p></div></div>
+    <div class="tbl">
+      <table class="rowlink">
+        <thead><tr id="hdLevels"></tr></thead>
+        <tbody id="tLevels"></tbody>
+      </table>
+    </div>
+    <p class="def" id="defLevels"></p>
+  </section>
+
+  <section class="block" id="bTests">
+    <div class="bh"><div><h2>Test-wise participation</h2><p id="pTests"></p></div></div>
+    <div class="tbl">
+      <table class="rowlink">
+        <thead><tr id="hdTests"></tr></thead>
+        <tbody id="tTests"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="bTook">
+    <div class="bh">
+      <div><h2>Students who took the test <span class="count" id="chTook"></span></h2><p>Every attempt as recorded: mark, date, and time used as a % of the ideal test time.</p></div>
+      <input class="search" type="search" id="qTook" placeholder="Search student" aria-label="Search students who took the test">
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th class="idx">#</th><th>Student</th><th>Section</th><th>Level</th><th class="c">Roll no.</th><th>Ideal time</th><th class="c">Attempts</th><th>Attempt 1</th><th>Attempt 2</th><th>Attempt 3</th></tr></thead>
+        <tbody id="tTook"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="block" id="bNot">
+    <div class="bh">
+      <div><h2>Students who did not take the test <span class="count" id="chNot"></span></h2><p>No attempt recorded for the selected test.</p></div>
+      <input class="search" type="search" id="qNot" placeholder="Search student" aria-label="Search students who did not take the test">
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th class="idx">#</th><th>Student</th><th>Section</th><th>Level</th><th class="c">Roll no.</th></tr></thead>
+        <tbody id="tNot"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<dialog id="pop" aria-labelledby="pTitle">
+  <div class="mh"><div><h3 id="pTitle"></h3><p id="pSub"></p></div><button class="x" id="pClose" type="button" aria-label="Close">×</button></div>
+  <div class="mb"><input class="search" type="search" id="pq" placeholder="Search student" aria-label="Search student"><div id="pBody"></div></div>
+</dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>/* Minimal, dependency-free .xlsx writer (stored ZIP, inline strings). */
+const XL = (() => {
+  const crcT = new Uint32Array(256).map((_, n) => { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; return c >>> 0; });
+  const crc32 = (b) => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = crcT[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
+  const te = new TextEncoder();
+  function zip(files) {
+    const parts = [], central = []; let off = 0;
+    for (const f of files) {
+      const nm = te.encode(f.name), d = te.encode(f.text), crc = crc32(d);
+      const h = new DataView(new ArrayBuffer(30));
+      h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, 0, true);
+      h.setUint16(10, 0, true); h.setUint16(12, 0x21, true); h.setUint32(14, crc, true);
+      h.setUint32(18, d.length, true); h.setUint32(22, d.length, true); h.setUint16(26, nm.length, true); h.setUint16(28, 0, true);
+      parts.push(new Uint8Array(h.buffer), nm, d);
+      const c = new DataView(new ArrayBuffer(46));
+      c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true);
+      c.setUint16(10, 0, true); c.setUint16(12, 0, true); c.setUint16(14, 0x21, true); c.setUint32(16, crc, true);
+      c.setUint32(20, d.length, true); c.setUint32(24, d.length, true); c.setUint16(28, nm.length, true);
+      c.setUint16(30, 0, true); c.setUint16(32, 0, true); c.setUint16(34, 0, true); c.setUint16(36, 0, true); c.setUint32(38, 0, true); c.setUint32(42, off, true);
+      central.push(new Uint8Array(c.buffer), nm);
+      off += 30 + nm.length + d.length;
+    }
+    const csize = central.reduce((s, a) => s + a.length, 0);
+    const e = new DataView(new ArrayBuffer(22));
+    e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true);
+    e.setUint32(12, csize, true); e.setUint32(16, off, true);
+    return new Blob([...parts, ...central, new Uint8Array(e.buffer)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  }
+  const esc = (s) => String(s).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const colName = (i) => { let s = ''; i += 1; while (i) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; };
+  const cell = (ref, v, s) => {
+    const st = s ? ` s="${s}"` : '';
+    if (v === null || v === undefined || v === '') return s ? `<c r="${ref}"${st}/>` : '';
+    if (typeof v === 'number' && isFinite(v)) return `<c r="${ref}"${st}><v>${v}</v></c>`;
+    return `<c r="${ref}" t="inlineStr"${st}><is><t xml:space="preserve">${esc(v)}</t></is></c>`;
+  };
+  /* title: string; info: [[label, value]]; header: [..]; rows: [[..]]; widths: [..] */
+  function workbook({ sheetName, title, info, header, rows, widths }) {
+    const sn = esc(sheetName.replace(/[\\\/?*\[\]:]/g, ' ').slice(0, 31));
+    const out = []; let r = 0;
+    const push = (vals, style) => { r++; out.push(`<row r="${r}">${vals.map((v, i) => cell(colName(i) + r, v, typeof style === 'function' ? style(i) : style)).join('')}</row>`); };
+    push([title], 3);
+    info.forEach(([k, v]) => push([k, v], (i) => (i === 0 ? 2 : 0)));
+    r++; // blank row
+    push(header, 1);
+    const hr = r;
+    rows.forEach((row) => push(row, 0));
+    const last = Math.max(r, hr + 1), lastCol = colName(header.length - 1);
+    const cols = (widths || header.map(() => 14)).map((w, i) => `<col min="${i + 1}" max="${i + 1}" width="${w}" customWidth="1"/>`).join('');
+    const sheet = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheetViews><sheetView workbookViewId="0"><pane ySplit="${hr}" topLeftCell="A${hr + 1}" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft" activeCell="A${hr + 1}" sqref="A${hr + 1}"/></sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols>${cols}</cols><sheetData>${out.join('')}</sheetData><autoFilter ref="A${hr}:${lastCol}${last}"/></worksheet>`;
+    const wb = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="${sn}" sheetId="1" r:id="rId1"/></sheets><definedNames><definedName name="_xlnm._FilterDatabase" localSheetId="0" hidden="1">'${sn.replace(/'/g, "''")}'!$A$${hr}:$${lastCol}$${last}</definedName></definedNames></workbook>`;
+    const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="3"><font><sz val="11"/><name val="Calibri"/><family val="2"/></font><font><b/><sz val="11"/><name val="Calibri"/><family val="2"/></font><font><b/><sz val="14"/><name val="Calibri"/><family val="2"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE8EBF7"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left/><right/><top/><bottom style="thin"><color rgb="FF9AA3B5"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="4"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+    return zip([
+      { name: '[Content_Types].xml', text: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>` },
+      { name: '_rels/.rels', text: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>` },
+      { name: 'xl/workbook.xml', text: wb },
+      { name: 'xl/_rels/workbook.xml.rels', text: `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>` },
+      { name: 'xl/worksheets/sheet1.xml', text: sheet },
+      { name: 'xl/styles.xml', text: styles },
+    ]);
+  }
+  return { workbook };
+})();
+</script>
+<script>
+const ROLL = {"10":{"10A":41,"10C":14,"10D":18}}; // students on roll per section, from the school class lists
+const DATA = {"S":[["10","AGRIMA SREE .D.H","10A",1],["10","Afaf Azhar Muhammad Azhar","10A",2],["10","Aiswarya Raj","10A",3],["10","Ameneh Ali Bastan","10A",4],["10","Ameya Sadhiq","10A",5],["10","Anaan Rafeeq Palakkat","10A",6],["10","Anamika Anoop","10A",7],["10","Anushka A P","10A",8],["10","Asna Lulu Abdul Azeez","10A",9],["10","Bibi Ayesha Waleed Gul","10A",10],["10","Dua Zahra","10A",11],["10","FATHIMA THASLIMA BANU","10A",12],["10","FATHIMATH FIDHA YEROL","10A",13],["10","FATIMA ABID","10A",14],["10","Fathima Faiza","10A",15],["10","Fathima Ridha","10A",16],["10","Fathwima Shahma","10A",17],["10","Feba Silvey Varghese","10A",18],["10","HIBA FATHIMA.P","10A",19],["10","Hamdha Vadakkarakath","10A",20],["10","Hanfa Shahreen Thottasseri","10A",21],["10","Hanna Fathima Mukkorakkal","10A",22],["10","Hanna Koyakkatti Parambil","10A",23],["10","Haripriya Kochukareeparampu","10A",24],["10","Hessa Morad Bakhsh Chakeri","10A",25],["10","Huda Nasar","10A",26],["10","Husna Khalil Khalil","10A",27],["10","JASIYA ABDULLAH AL ANMAN","10A",28],["10","Jafia Grace John Christopher","10A",29],["10","MINHA FATHIMA .P","10A",30],["10","MUNIBA SHAHID","10A",31],["10","Manha Bint Ameen","10A",32],["10","NAFEESA CHERATTIYATT","10A",33],["10","NEETA PRASANTH","10A",34],["10","Neha Maria Binu","10A",35],["10","RESHMA AHTESHAM","10A",36],["10","SIMRA MUZAMMIL DABIR","10A",37],["10","Sheza Fathima Arthi Kunnath","10A",38],["10","Subiksha Selvendran","10A",39],["10","Zainab Mohamed","10A",40],["10","Zainab Zia Zia Ur Rehman","10A",41],["10","Abel John Blassan","10C",1],["10","Adnan Bainullah Khan","10C",2],["10","Ahmad Rabeeh Musliamveettil Korissery","10C",3],["10","Arjun.T.P","10C",4],["10","Hiran Aakesh","10C",5],["10","Ismail Ali Ali","10C",6],["10","Jaseel Changaranchola","10C",7],["10","Mohammed Aahil Mohamed Gouse","10C",8],["10","Muhammed Mujeeb Madambillath","10C",9],["10","Muhammed Shammas Pothuvachola","10C",10],["10","Omar Bin Mahamood Al Sharabi","10C",11],["10","Reghuram Thalapilly Ramrajiv Pullakate","10C",12],["10","Yaseen Ahammed Sajeer","10C",13],["10","Yathindra Bokkena Shanker Bokkena","10C",14],["10","ABDUL HADI MEHTHASH","10D",1],["10","ADHIN ANVER","10D",2],["10","AHAMED MAHROOF SHAH","10D",3],["10","Adnan Ashfaq Ahmed Banvasi","10D",4],["10","Afshin Rafeeq","10D",5],["10","IMAN .K.P","10D",6],["10","Imran Aziz Azizul Hoque","10D",7],["10","Jonathan Joby Kappen","10D",8],["10","MUHAMMED RINAS .A.S","10D",9],["10","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D",10],["10","Mohammad Arsalan Mohammad Mohtashim","10D",11],["10","Mohammad Irfan","10D",12],["10","Muhammad Fadhil Saifudheen","10D",13],["10","Muhammed Faiz","10D",14],["10","Muhammed Hanan Chalil Parambil","10D",15],["10","Muhammed Rayan Chaikalikkandakath","10D",16],["10","NAZIF AHMED","10D",17],["10","Sree Ram Thalapilly","10D",18]],"A":[["10","Mathematics","Diagnostic Test - Real Numbers","Hanna Fathima Mukkorakkal","10A","Diagnostic Test - Real Numbers","00:10:00",1,[["03-04-2026","4/10",4.83]],"1. Real Numbers"],["10","Mathematics","Diagnostic Test - Statistics","Hanna Fathima Mukkorakkal","10A","Diagnostic Test - Statistics","00:12:00",1,[["03-04-2026","4/10",7.36]],"13. Statistics"],["10","Science","Diagnostic Test- Life Processes","Anamika Anoop","10A","Diagnostic Test- Life Processes","00:15:00",1,[["05-05-2026","10/10",23.78]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","Anamika Anoop","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",2,[["05-05-2026","0/5",18.83],["05-05-2026","3/5",14]],"05 Life Processes"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","Anamika Anoop","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,[["05-05-2026","3/5",27.83]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Plants","Anamika Anoop","10A","Reinforcement Quiz- Respiration in Plants","00:10:00",3,[["05-05-2026","1/5",6.67],["05-05-2026","2/5",13.67],["05-05-2026","2/5",7.83]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Dua Zahra","10A","Diagnostic Test- Life Processes","00:15:00",1,[["05-05-2026","8/10",13]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","Dua Zahra","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",1,[["05-05-2026","2/5",29.5]],"05 Life Processes"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","Dua Zahra","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,[["05-05-2026","3/5",22.5]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Hessa Morad Bakhsh Chakeri","10A","Diagnostic Test- Life Processes","00:15:00",1,[["05-05-2026","10/10",29.33]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","Hessa Morad Bakhsh Chakeri","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",2,[["05-05-2026","1/5",41.33],["05-05-2026","3/5",4.5]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Plants","Hessa Morad Bakhsh Chakeri","10A","Reinforcement Quiz- Respiration in Plants","00:10:00",1,[["05-05-2026","3/5",64.17]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Huda Naser Bahashwan","10B","Diagnostic Test- Life Processes","00:15:00",1,[["05-05-2026","6/10",32.44]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Jafia Grace John Christopher","10A","Diagnostic Test- Life Processes","00:15:00",1,[["09-03-2026","10/10",10.11]],"05 Life Processes"],["10","Science","Reinforcement Quiz - Transportation in Humans","Jafia Grace John Christopher","10A","Reinforcement Quiz - Transportation in Humans","00:10:00",2,[["05-05-2026","4/5",14],["05-05-2026","5/5",3.5]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","Jafia Grace John Christopher","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",3,[["05-05-2026","4/5",4.67],["05-05-2026","3/5",15.83],["05-05-2026","5/5",3]],"05 Life Processes"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","Jafia Grace John Christopher","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",2,[["05-05-2026","4/5",13.5],["05-05-2026","5/5",12.17]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Animals","Jafia Grace John Christopher","10A","Reinforcement Quiz- Respiration in Animals","00:10:00",2,[["05-05-2026","4/5",11.33],["05-05-2026","5/5",3]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Plants","Jafia Grace John Christopher","10A","Reinforcement Quiz- Respiration in Plants","00:10:00",2,[["05-05-2026","3/5",10.17],["05-05-2026","5/5",2.67]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Transportation in Plants","Jafia Grace John Christopher","10A","Reinforcement Quiz- Transportation in Plants","00:10:00",3,[["05-05-2026","4/5",4.83],["05-05-2026","4/5",13],["05-05-2026","5/5",2.5]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test- Life Processes","00:15:00",2,[["03-04-2026","7/10",8.11],["05-05-2026","8/10",8]],"05 Life Processes"],["10","Science","Misconception Quiz","JASIYA ABDULLAH AL ANMAN","10A","Misconception Quiz","00:10:00",2,[["05-05-2026","2/7",5.67],["05-05-2026","4/7",5.33]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Muneeba Shahid","10B","Diagnostic Test- Life Processes","00:15:00",2,[["02-04-2026","10/10",34.89],["05-05-2026","10/10",20.11]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","NEETA PRASANTH","10A","Diagnostic Test- Life Processes","00:15:00",2,[["03-04-2026","10/10",17.56],["05-05-2026","0/10",2.56]],"05 Life Processes"],["10","Science","Reinforcement Quiz - Transportation in Humans","NEETA PRASANTH","10A","Reinforcement Quiz - Transportation in Humans","00:10:00",1,[["05-05-2026","2/5",18.5]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","NEETA PRASANTH","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",3,[["05-05-2026","2/5",5.17],["05-05-2026","1/5",6.67],["05-05-2026","0/5",8.5]],"05 Life Processes"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","NEETA PRASANTH","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,[["05-05-2026","3/5",24.5]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Animals","NEETA PRASANTH","10A","Reinforcement Quiz- Respiration in Animals","00:10:00",1,[["05-05-2026","3/5",24.17]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Plants","NEETA PRASANTH","10A","Reinforcement Quiz- Respiration in Plants","00:10:00",1,[["05-05-2026","1/5",11.67]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Neha Maria Binu","10A","Diagnostic Test- Life Processes","00:15:00",1,[["03-04-2026","10/10",15.67]],"05 Life Processes"],["10","Science","Reinforcement Quiz - Transportation in Humans","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz - Transportation in Humans","00:10:00",2,[["05-05-2026","1/5",19.67],["05-05-2026","5/5",2.33]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",3,[["03-04-2026","1/5",17.17],["03-04-2026","4/5",3.17],["05-05-2026","4/5",14.17]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Excretion in plants and animals","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz- Excretion in plants and animals","00:10:00",2,[["05-05-2026","5/5",2.83],["05-05-2026","1/5",14.83]],"05 Life Processes"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",3,[["03-04-2026","0/5",16.33],["05-05-2026","2/5",20],["05-05-2026","5/5",9.83]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Animals","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz- Respiration in Animals","00:10:00",1,[["05-05-2026","3/5",16.83]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Plants","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz- Respiration in Plants","00:10:00",1,[["05-05-2026","3/5",9.33]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Transportation in Plants","SIMRA MUZAMMIL DABIR","10A","Reinforcement Quiz- Transportation in Plants","00:10:00",2,[["05-05-2026","1/5",10],["05-05-2026","3/5",2.83]],"05 Life Processes"],["10","Science","Diagnostic Test- Life Processes","Zainab Mohamed","10A","Diagnostic Test- Life Processes","00:15:00",1,[["03-04-2026","10/10",14.67]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Autotrophic Nutrition","Zainab Mohamed","10A","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",1,[["05-05-2026","5/5",24.33]],"05 Life Processes"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","Zainab Mohamed","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,[["05-05-2026","5/5",16.33]],"05 Life Processes"],["10","Science","Reinforcement Quiz- Respiration in Plants","Zainab Mohamed","10A","Reinforcement Quiz- Respiration in Plants","00:10:00",1,[["05-05-2026","5/5",19]],"05 Life Processes"],["10","Mathematics","Reinforcement Quiz - Fundamental Theorem of Arithmetic","Hiran Aakesh","10C","Reinforcement Quiz - Fundamental Theorem of Arithmetic","00:05:00",2,[["05-04-2026","3/5",93.67],["10-04-2026","3/5",93]],"1. Real Numbers"],["10","Mathematics","Diagnostic Test - Statistics","Muhammed Shammas Pothuvachola","10C","Diagnostic Test - Statistics","00:12:00",1,[["01-04-2026","7/10",34.72]],"13. Statistics"],["10","Social Science","Assessment Test","Hiran Aakesh","10C","Assessment Test","00:10:00",1,[["16-03-2026","8/10",13]],"1. Power Sharing"],["10","Social Science","Diagnostic Test","Hiran Aakesh","10C","Diagnostic Test","00:09:00",1,[["20-03-2026","7/9",55.93]],"1. Power Sharing"],["10","Social Science","Diagnostic test","Hiran Aakesh","10C","Diagnostic test","00:09:00",1,[["24-03-2026","8/9",11.3]],"2. Federalism"],["10","Social Science","Reinforcement Quiz I - Comparative Study of Belgium and Sri Lanka","Hiran Aakesh","10C","Reinforcement Quiz I - Comparative Study of Belgium and Sri Lanka","00:05:00",1,[["16-03-2026","5/5",42.33]],"1. Power Sharing"],["10","Social Science","Reinforcement Quiz II - Majoritarianism in Sri Lanka","Hiran Aakesh","10C","Reinforcement Quiz II - Majoritarianism in Sri Lanka","00:05:00",1,[["16-03-2026","5/5",18]],"1. Power Sharing"],["10","Social Science","Reinforcement Quiz III - Accomodation in Belgium and Lebanon","Hiran Aakesh","10C","Reinforcement Quiz III - Accomodation in Belgium and Lebanon","00:05:00",1,[["16-03-2026","5/5",20.67]],"1. Power Sharing"],["10","Social Science","Diagnostic test","Yaseen Ahammed Sajeer","10C","Diagnostic test","00:09:00",1,[["20-04-2026","9/9",8.7]],"2. Federalism"],["10","Social Science","Diagnostic Test","ABDUL HADI MEHTHASH","10D","Diagnostic Test","00:10:00",1,[["21-05-2026","10/10",46.83]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","Adnan Ashfaq Ahmed Banvasi","10D","Diagnostic Test","00:10:00",1,[["21-05-2026","3/10",33.17]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","Afshin Rafeeq","10D","Diagnostic Test","00:10:00",3,[["21-05-2026","0/10",15.67],["21-05-2026","8/10",5.5],["21-05-2026","10/10",5.17]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","AHAMED MAHROOF SHAH","10D","Diagnostic Test","00:10:00",1,[["21-05-2026","8/10",15.5]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","Jonathan Joby Kappen","10D","Diagnostic Test","00:10:00",1,[["21-05-2026","4/10",15.67]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Diagnostic Test","00:09:00",1,[["01-04-2026","7/9",13.89]],"1. Power Sharing"],["10","Social Science","Diagnostic test","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Diagnostic test","00:09:00",1,[["01-04-2026","4/9",18.52]],"2. Federalism"],["10","Social Science","Diagnostic Test","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Diagnostic Test","00:10:00",1,[["21-05-2026","4/10",32.5]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","Muhammed Faiz","10D","Diagnostic Test","00:10:00",2,[["21-05-2026","4/10",36.67],["21-05-2026","9/10",8]],"3. Gender, Religion and Caste"],["10","Social Science","Diagnostic Test","Muhammed Rayan Chaikalikkandakath","10D","Diagnostic Test","00:10:00",1,[["21-05-2026","4/10",38.83]],"3. Gender, Religion and Caste"],["10","Science","Diagnostic Test","ABDUL HADI MEHTHASH","10D","Diagnostic Test","00:20:00",1,[["17-04-2026","20/20",26.67]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic test.","ABDUL HADI MEHTHASH","10D","Diagnostic test.","00:20:00",3,[["17-04-2026","19/20",31.75],["17-04-2026","19/20",22],["17-04-2026","19/20",11.08]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test- Life Processes","Afshin Rafeeq","10D","Diagnostic Test- Life Processes","00:15:00",1,[["02-04-2026","9/10",20.56]],"05 Life Processes"],["10","Science","Diagnostic test.","Afshin Rafeeq","10D","Diagnostic test.","00:20:00",1,[["02-04-2026","11/20",24.67]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test","AHAMED MAHROOF SHAH","10D","Diagnostic Test","00:20:00",1,[["17-04-2026","17/20",68.25]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic test.","AHAMED MAHROOF SHAH","10D","Diagnostic test.","00:20:00",1,[["17-04-2026","11/20",66.08]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test","Jonathan Joby Kappen","10D","Diagnostic Test","00:20:00",1,[["02-04-2026","11/20",14.92]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic Test- Life Processes","Jonathan Joby Kappen","10D","Diagnostic Test- Life Processes","00:15:00",2,[["09-03-2026","9/10",6.33],["02-04-2026","9/10",5.78]],"05 Life Processes"],["10","Science","Diagnostic Test","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Diagnostic Test","00:20:00",1,[["17-04-2026","15/20",74.33]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic test.","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Diagnostic test.","00:20:00",2,[["01-04-2026","11/20",44.08],["17-04-2026","11/20",61.83]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test","Muhammed Rayan Chaikalikkandakath","10D","Diagnostic Test","00:20:00",1,[["17-04-2026","16/20",12]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic test.","Muhammed Rayan Chaikalikkandakath","10D","Diagnostic test.","00:20:00",1,[["31-03-2026","13/20",21.5]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test","Sree Ram Thalapilly","10D","Diagnostic Test","00:20:00",2,[["17-04-2026","5/20",6.17],["17-04-2026","11/20",10.92]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic test.","Sree Ram Thalapilly","10D","Diagnostic test.","00:20:00",1,[["17-04-2026","0/20",0.75]],"01 Chemical Reactions and Equations"],["10","English","Diagnostic Test","ABDUL HADI MEHTHASH","10D","Diagnostic Test","00:06:00",2,[["02-04-2026","1/6",19.72],["02-04-2026","5/6",11.39]],"1. A Triumph Of Surgery"],["10","English","Diagnostic Test","ABDUL HADI MEHTHASH","10D","Diagnostic Test","00:07:00",3,[["14-10-2026","6/7",28.1],["14-10-2026","6/7",10.71],["14-10-2026","7/7",10.24]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","ABDUL HADI MEHTHASH","10D","Learning Competency Quiz - Level I","00:07:00",1,[["14-10-2026","7/7",25.71]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","ABDUL HADI MEHTHASH","10D","Learning Competency Quiz - Level II","00:06:00",1,[["14-10-2026","6/6",24.44]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","ADHIN ANVER","10D","Diagnostic Test","00:07:00",1,[["14-10-2026","6/7",39.05]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","Adnan Ashfaq Ahmed Banvasi","10D","Diagnostic Test","00:07:00",2,[["14-10-2026","2/7",31.43],["14-10-2026","5/7",9.29]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","Adnan Ashfaq Ahmed Banvasi","10D","Diagnostic Test","00:08:00",1,[["14-10-2026","3/8",25.83]],"7 (ii) The Tale of Custard the Dragon"],["10","English","Diagnostic Test- The Sermon at Benares","Adnan Ashfaq Ahmed Banvasi","10D","Diagnostic Test- The Sermon at Benares","00:05:00",1,[["14-10-2026","3/4",26.33]],"8 (i) The Sermon At Benares"],["10","English","Learning Competency Quiz - Level I","AHAMED MAHROOF SHAH","10D","Learning Competency Quiz - Level I","00:07:00",1,[["14-10-2026","5/7",15.71]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","AHAMED MAHROOF SHAH","10D","Learning Competency Quiz - Level II","00:06:00",1,[["14-10-2026","4/6",24.72]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","Imran Aziz Azizul Hoque","10D","Learning Competency Quiz - Level I","00:07:00",2,[["13-10-2026","6/7",90.24],["13-10-2026","0/7",4.05]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","Imran Aziz Azizul Hoque","10D","Learning Competency Quiz - Level II","00:06:00",1,[["13-10-2026","6/6",81.11]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","Jonathan Joby Kappen","10D","Diagnostic Test","00:07:00",1,[["13-10-2026","6/7",25.24]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","Jonathan Joby Kappen","10D","Learning Competency Quiz - Level I","00:07:00",1,[["13-10-2026","6/7",17.14]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","Jonathan Joby Kappen","10D","Learning Competency Quiz - Level II","00:06:00",1,[["13-10-2026","5/6",92.5]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Diagnostic Test","00:07:00",1,[["14-10-2026","5/7",50.71]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Learning Competency Quiz - Level I","00:07:00",1,[["14-10-2026","3/7",25]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","Learning Competency Quiz - Level II","00:06:00",1,[["14-10-2026","4/6",39.72]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","Mohammad Arsalan Mohammad Mohtashim","10D","Diagnostic Test","00:07:00",2,[["14-10-2026","0/7",4.05],["14-10-2026","4/7",40.48]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test- The Sermon at Benares","Mohammad Arsalan Mohammad Mohtashim","10D","Diagnostic Test- The Sermon at Benares","00:05:00",1,[["14-10-2026","4/4",22]],"8 (i) The Sermon At Benares"],["10","English","Diagnostic Test","Muhammad Fadhil Saifudheen","10D","Diagnostic Test","00:07:00",1,[["14-10-2026","7/7",31.9]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","Muhammed Rayan Chaikalikkandakath","10D","Learning Competency Quiz - Level I","00:07:00",1,[["14-10-2026","3/7",26.43]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","Muhammed Rayan Chaikalikkandakath","10D","Learning Competency Quiz - Level II","00:06:00",1,[["14-10-2026","2/6",38.89]],"7 (i) Madam Rides The Bus"],["10","English","Diagnostic Test","NAZIF AHMED","10D","Diagnostic Test","00:07:00",1,[["14-10-2026","4/7",43.33]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","Sree Ram Thalapilly","10D","Learning Competency Quiz - Level I","00:07:00",1,[["14-10-2026","6/7",22.14]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level II","Sree Ram Thalapilly","10D","Learning Competency Quiz - Level II","00:06:00",1,[["14-10-2026","2/6",41.67]],"7 (i) Madam Rides The Bus"],["10","English","Learning Competency Quiz - Level I","Feba Silvey Varghese","10A","Learning Competency Quiz - Level I","00:12:00",1,[["07-04-2026","8/10",19.31]],"1 (i) A Letter to God"],["10","English","Learning Competency Quiz - Level I","Feba Silvey Varghese","10A","Learning Competency Quiz - Level I","00:12:00",1,[["09-04-2026","10/10",18.47]],"1 (ii) Dust of Snow"],["10","English","Learning Competency Quiz - Level II","Feba Silvey Varghese","10A","Learning Competency Quiz - Level II","00:08:00",1,[["09-04-2026","4/5",37.29]],"1 (ii) Dust of Snow"],["10","English","Assessment Test","Hanna Fathima Mukkorakkal","10A","Assessment Test","00:15:00",2,[["07-04-2026","1/15",12.22],["07-04-2026","15/15",6]],"1 (i) A Letter to God"],["10","English","Assessment Test","Hanna Fathima Mukkorakkal","10A","Assessment Test","00:10:00",1,[["07-04-2026","2/10",33.33]],"1 (ii) Dust of Snow"],["10","Social Science","Reinforcement Quiz I - Need of Political Parties","AGRIMA SREE .D.H","10A","Reinforcement Quiz I - Need of Political Parties","00:05:00",1,[["17-09-2026","2/5",35.33]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Aiswarya Raj","10A","Diagnostic Test","00:10:00",2,[["17-09-2026","4/10",46],["17-09-2026","6/10",10]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Anaan Rafeek Palakkat Palakkattu Parambil Kunhimoh","10A","Diagnostic Test","00:09:00",1,[["07-04-2026","9/9",20.56]],"1. Power Sharing"],["10","Social Science","Diagnostic Test","Fathima Faiza","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","9/10",39.83]],"4. Political Parties"],["10","Social Science","Diagnostic Test","FATHIMA THASLIMA BANU","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","5/10",13.67]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Fathwima Shahma","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","7/10",32.33]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Feba Silvey Varghese","10A","Diagnostic Test","00:09:00",1,[["04-04-2026","9/9",8.33]],"1. Power Sharing"],["10","Social Science","Diagnostic test","Feba Silvey Varghese","10A","Diagnostic test","00:09:00",1,[["19-04-2026","9/9",8.33]],"2. Federalism"],["10","Social Science","Diagnostic Test","Feba Silvey Varghese","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","8/10",44]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Hanna Kp","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","8/10",31.67]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Hanna Fathima Mukkorakkal","10A","Diagnostic Test","00:09:00",3,[["03-04-2026","1/9",100],["03-04-2026","4/9",6.67],["03-04-2026","2/9",6.11]],"1. Power Sharing"],["10","Social Science","Diagnostic test","Hanna Fathima Mukkorakkal","10A","Diagnostic test","00:09:00",1,[["03-04-2026","3/9",8.33]],"2. Federalism"],["10","Social Science","Diagnostic Test","Hanna Fathima Mukkorakkal","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","5/10",31.17]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Haripriya Kochukareeparampu","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","7/10",30.5]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Manha Bint Ameen","10A","Diagnostic Test","00:10:00",1,[["17-09-2026","7/10",23.17]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Zainab Zia Zia Ur Rehman","10A","Diagnostic Test","00:10:00",2,[["17-09-2026","7/10",26.17],["17-09-2026","9/10",8.5]],"4. Political Parties"],["10","Social Science","Reinforcement Quiz III - How is Federalism Practised","Zainab Zia Zia Ur Rehman","10A","Reinforcement Quiz III - How is Federalism Practised","00:05:00",2,[["06-04-2026","2/5",59.33],["06-04-2026","5/5",13.33]],"2. Federalism"],["10","Social Science","Diagnostic Test","Jafia Grace John Christopher","10A","Diagnostic Test","00:10:00",1,[["18-09-2026","8/10",24.17]],"4. Political Parties"],["10","Social Science","Reinforcement Quiz III - How is Federalism Practised","Jafia Grace John Christopher","10A","Reinforcement Quiz III - How is Federalism Practised","00:05:00",3,[["01-04-2026","4/5",60.67],["06-04-2026","4/5",27.67],["06-04-2026","5/5",10.33]],"2. Federalism"],["10","Social Science","Diagnostic Test","NEETA PRASANTH","10A","Diagnostic Test","00:09:00",2,[["19-03-2026","0/9",7.22],["19-03-2026","7/9",10.19]],"1. Power Sharing"],["10","Social Science","Diagnostic Test","NEETA PRASANTH","10A","Diagnostic Test","00:10:00",1,[["16-09-2026","9/10",20.67]],"4. Political Parties"],["10","Social Science","Reinforcement Quiz I - Need of Political Parties","Neha Maria Binu","10A","Reinforcement Quiz I - Need of Political Parties","00:05:00",1,[["16-09-2026","3/5",57.67]],"4. Political Parties"],["10","Social Science","Diagnostic Test","Zainab Mohamed","10A","Diagnostic Test","00:10:00",1,[["16-09-2026","9/10",18.83]],"4. Political Parties"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:09:00",1,[["29-09-2026","3/9",17.22]],"1 (iii) Fire and Ice"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","4/7",12.62]],"2 (i) Nelson Mandela - Long Walk To Freedom"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:09:00",1,[["29-09-2026","3/8",15]],"2 (ii) A Tiger in the Zoo"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:08:00",1,[["29-09-2026","6/8",13.33]],"3 (i) Two Stories About Flying: His First Flight"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:08:00",1,[["29-09-2026","4/8",14.58]],"3 (ii) Two Stories About Flying: Black Aeroplane"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:08:00",1,[["29-09-2026","8/8",12.71]],"3 (iii) How to Tell Wild Animals"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","7/7",15.24]],"3 (iv) The Ball Poem"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","5/7",10.24]],"4 (i) From The Diary Of Anne Frank"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","5/7",9.05]],"4 (ii) Amanda!"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","6/7",27.62]],"5 (i) Glimpses Of India - A Baker from Goa"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:05:00",1,[["29-09-2026","2/5",18]],"5 (ii) Glimpses of India - Coorg"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:06:00",1,[["29-09-2026","4/6",10.83]],"5 (iii) Glimpses of India - Tea from Assam"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","2/7",13.1]],"6 (i) Mijbil The Otter"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","4/7",11.19]],"6 (ii) Fog"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","4/7",15]],"9 The Proposal"],["10","English","Diagnostic Test - A Letter to God","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test - A Letter to God","00:06:00",1,[["29-09-2026","5/6",16.39]],"1 (i) A Letter to God"],["10","English","Diagnostic Test - Dust of Snow","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test - Dust of Snow","00:07:00",1,[["29-09-2026","6/7",19.29]],"1 (ii) Dust of Snow"],["10","English","Learning Competency Quiz - Level I","Anamika Anoop","10A","Learning Competency Quiz - Level I","00:12:00",1,[["02-04-2026","9/10",63.75]],"1. A Triumph Of Surgery"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:06:00",1,[["29-09-2026","4/6",17.5]],"1. A Triumph Of Surgery"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:05:00",1,[["29-09-2026","3/5",14]],"2. The Thief\u2019s Story"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:06:00",1,[["29-09-2026","4/6",23.61]],"3. The Midnight Visitor"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:06:00",1,[["29-09-2026","4/6",14.72]],"4. A Question Of Trust"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:08:00",1,[["29-09-2026","4/8",9.17]],"5. Footprints Without Feet"],["10","English","Diagnostic Test","JASIYA ABDULLAH AL ANMAN","10A","Diagnostic Test","00:07:00",1,[["29-09-2026","7/7",18.57]],"6. The Making Of a Scientist"],["10","Science","Diagnostic Test","Aiswarya Raj","10A","Diagnostic Test","00:20:00",2,[["19-05-2026","1/20",8],["19-05-2026","12/20",5.42]],"03 Metals and Non - Metals"],["10","Science","Diagnostic Test- Life Processes","Aiswarya Raj","10A","Diagnostic Test- Life Processes","00:15:00",2,[["01-04-2026","3/10",2.89],["01-04-2026","10/10",3.44]],"05 Life Processes"],["10","Science","Diagnostic test.","Aiswarya Raj","10A","Diagnostic test.","00:20:00",3,[["30-03-2026","2/20",2.33],["30-03-2026","16/20",8.92],["05-05-2026","12/20",75]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test- Life Processes","Fathima Faiza","10A","Diagnostic Test- Life Processes","00:15:00",1,[["01-04-2026","10/10",33.44]],"05 Life Processes"],["10","Science","Diagnostic test.","FATHIMA THASLIMA BANU","10A","Diagnostic test.","00:20:00",1,[["07-04-2026","14/20",24.58]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test","Feba Silvey Varghese","10A","Diagnostic Test","00:20:00",2,[["03-04-2026","15/20",28.42],["03-04-2026","19/20",7.08]],"02 Acids, Bases and Salts"],["10","Science","Diagnostic Test- Life Processes","Feba Silvey Varghese","10A","Diagnostic Test- Life Processes","00:15:00",3,[["08-03-2026","7/10",10.11],["09-03-2026","10/10",5.44],["01-04-2026","9/10",12.22]],"05 Life Processes"],["10","Science","Diagnostic test.","Feba Silvey Varghese","10A","Diagnostic test.","00:20:00",2,[["30-03-2026","14/20",4.83],["30-03-2026","13/20",69.33]],"01 Chemical Reactions and Equations"],["10","Science","Reinforcement Quiz- How do Organisms obtain their Nutrition","Feba Silvey Varghese","10A","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,[["08-03-2026","2/5",21.33]],"05 Life Processes"],["10","Science","Diagnostic Test","Hanna Fathima Mukkorakkal","10A","Diagnostic Test","00:10:00",1,[["03-04-2026","3/15",7.83]],"09 Light - Reflection and Refraction"],["10","Science","Diagnostic Test- Life Processes","Hanna Fathima Mukkorakkal","10A","Diagnostic Test- Life Processes","00:15:00",1,[["03-04-2026","6/10",24]],"05 Life Processes"],["10","Science","Diagnostic test.","Hanna Fathima Mukkorakkal","10A","Diagnostic test.","00:20:00",2,[["03-04-2026","6/20",18.17],["07-04-2026","6/20",6.5]],"01 Chemical Reactions and Equations"],["10","Science","Reinforcement Quiz - Displacement and Double displacement Reactions","Hanna Fathima Mukkorakkal","10A","Reinforcement Quiz - Displacement and Double displacement Reactions","00:05:00",1,[["03-04-2026","4/5",5.33]],"01 Chemical Reactions and Equations"],["10","Science","Diagnostic Test- Life Processes","Haripriya Kochukareeparampu","10A","Diagnostic Test- Life Processes","00:15:00",1,[["06-04-2026","10/10",31.33]],"05 Life Processes"],["10","Science","Diagnostic test.","Haripriya Kochukareeparampu","10A","Diagnostic test.","00:20:00",1,[["06-04-2026","10/20",39.5]],"01 Chemical Reactions and Equations"]],"RAW":{"10":[["Hanna Fathima Mukkorakkal","10A","1. Real Numbers","Diagnostic Test - Real Numbers","00:10:00",1,"03-04-2026","4/10",4.83,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","13. Statistics","Diagnostic Test - Statistics","00:12:00",1,"03-04-2026","4/10",7.36,"","","","","",""],["Anamika Anoop","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"05-05-2026","10/10",23.78,"","","","","",""],["Anamika Anoop","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",2,"05-05-2026","0/5",18.83,"05-05-2026","3/5",14,"","",""],["Anamika Anoop","10B","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,"05-05-2026","3/5",27.83,"","","","","",""],["Anamika Anoop","10B","05 Life Processes","Reinforcement Quiz- Respiration in Plants","00:10:00",3,"05-05-2026","1/5",6.67,"05-05-2026","2/5",13.67,"05-05-2026","2/5",7.83],["Dua Zahra","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"05-05-2026","8/10",13,"","","","","",""],["Dua Zahra","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",1,"05-05-2026","2/5",29.5,"","","","","",""],["Dua Zahra","10B","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,"05-05-2026","3/5",22.5,"","","","","",""],["Hessa Morad Bakhsh Chakeri","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"05-05-2026","10/10",29.33,"","","","","",""],["Hessa Morad Bakhsh Chakeri","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",2,"05-05-2026","1/5",41.33,"05-05-2026","3/5",4.5,"","",""],["Hessa Morad Bakhsh Chakeri","10B","05 Life Processes","Reinforcement Quiz- Respiration in Plants","00:10:00",1,"05-05-2026","3/5",64.17,"","","","","",""],["Huda Naser Bahashwan","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"05-05-2026","6/10",32.44,"","","","","",""],["Jafia Grace John Christopher","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"09-03-2026","10/10",10.11,"","","","","",""],["Jafia Grace John Christopher","10B","05 Life Processes","Reinforcement Quiz - Transportation in Humans","00:10:00",2,"05-05-2026","4/5",14,"05-05-2026","5/5",3.5,"","",""],["Jafia Grace John Christopher","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",3,"05-05-2026","4/5",4.67,"05-05-2026","3/5",15.83,"05-05-2026","5/5",3],["Jafia Grace John Christopher","10B","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",2,"05-05-2026","4/5",13.5,"05-05-2026","5/5",12.17,"","",""],["Jafia Grace John Christopher","10B","05 Life Processes","Reinforcement Quiz- Respiration in Animals","00:10:00",2,"05-05-2026","4/5",11.33,"05-05-2026","5/5",3,"","",""],["Jafia Grace John Christopher","10B","05 Life Processes","Reinforcement Quiz- Respiration in Plants","00:10:00",2,"05-05-2026","3/5",10.17,"05-05-2026","5/5",2.67,"","",""],["Jafia Grace John Christopher","10B","05 Life Processes","Reinforcement Quiz- Transportation in Plants","00:10:00",3,"05-05-2026","4/5",4.83,"05-05-2026","4/5",13,"05-05-2026","5/5",2.5],["JASIYA ABDULLAH AL ANMAN","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",2,"03-04-2026","7/10",8.11,"05-05-2026","8/10",8,"","",""],["JASIYA ABDULLAH AL ANMAN","10B","05 Life Processes","Misconception Quiz","00:10:00",2,"05-05-2026","2/7",5.67,"05-05-2026","4/7",5.33,"","",""],["Muneeba Shahid","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",2,"02-04-2026","10/10",34.89,"05-05-2026","10/10",20.11,"","",""],["NEETA PRASANTH","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",2,"03-04-2026","10/10",17.56,"05-05-2026","0/10",2.56,"","",""],["NEETA PRASANTH","10B","05 Life Processes","Reinforcement Quiz - Transportation in Humans","00:10:00",1,"05-05-2026","2/5",18.5,"","","","","",""],["NEETA PRASANTH","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",3,"05-05-2026","2/5",5.17,"05-05-2026","1/5",6.67,"05-05-2026","0/5",8.5],["NEETA PRASANTH","10B","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,"05-05-2026","3/5",24.5,"","","","","",""],["NEETA PRASANTH","10B","05 Life Processes","Reinforcement Quiz- Respiration in Animals","00:10:00",1,"05-05-2026","3/5",24.17,"","","","","",""],["NEETA PRASANTH","10B","05 Life Processes","Reinforcement Quiz- Respiration in Plants","00:10:00",1,"05-05-2026","1/5",11.67,"","","","","",""],["Neha Maria Binu","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"03-04-2026","10/10",15.67,"","","","","",""],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz - Transportation in Humans","00:10:00",2,"05-05-2026","1/5",19.67,"05-05-2026","5/5",2.33,"","",""],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",3,"03-04-2026","1/5",17.17,"03-04-2026","4/5",3.17,"05-05-2026","4/5",14.17],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz- Excretion in plants and animals","00:10:00",2,"05-05-2026","5/5",2.83,"05-05-2026","1/5",14.83,"","",""],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",3,"03-04-2026","0/5",16.33,"05-05-2026","2/5",20,"05-05-2026","5/5",9.83],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz- Respiration in Animals","00:10:00",1,"05-05-2026","3/5",16.83,"","","","","",""],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz- Respiration in Plants","00:10:00",1,"05-05-2026","3/5",9.33,"","","","","",""],["SIMRA MUZAMMIL DABIR","10B","05 Life Processes","Reinforcement Quiz- Transportation in Plants","00:10:00",2,"05-05-2026","1/5",10,"05-05-2026","3/5",2.83,"","",""],["Zainab Mohamed","10B","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"03-04-2026","10/10",14.67,"","","","","",""],["Zainab Mohamed","10B","05 Life Processes","Reinforcement Quiz- Autotrophic Nutrition","00:10:00",1,"05-05-2026","5/5",24.33,"","","","","",""],["Zainab Mohamed","10B","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,"05-05-2026","5/5",16.33,"","","","","",""],["Zainab Mohamed","10B","05 Life Processes","Reinforcement Quiz- Respiration in Plants","00:10:00",1,"05-05-2026","5/5",19,"","","","","",""],["Hiran Aakesh","10C","1. Real Numbers","Reinforcement Quiz - Fundamental Theorem of Arithmetic","00:05:00",2,"05-04-2026","3/5",93.67,"10-04-2026","3/5",93,"","",""],["Muhammed Shammas Pothuvachola","10C","13. Statistics","Diagnostic Test - Statistics","00:12:00",1,"01-04-2026","7/10",34.72,"","","","","",""],["Hiran Aakesh","10C","1. Power Sharing","Assessment Test","00:10:00",1,"16-03-2026","8/10",13,"","","","","",""],["Hiran Aakesh","10C","1. Power Sharing","Diagnostic Test","00:09:00",1,"20-03-2026","7/9",55.93,"","","","","",""],["Hiran Aakesh","10C","2. Federalism","Diagnostic test","00:09:00",1,"24-03-2026","8/9",11.3,"","","","","",""],["Hiran Aakesh","10C","1. Power Sharing","Reinforcement Quiz I - Comparative Study of Belgium and Sri Lanka","00:05:00",1,"16-03-2026","5/5",42.33,"","","","","",""],["Hiran Aakesh","10C","1. Power Sharing","Reinforcement Quiz II - Majoritarianism in Sri Lanka","00:05:00",1,"16-03-2026","5/5",18,"","","","","",""],["Hiran Aakesh","10C","1. Power Sharing","Reinforcement Quiz III - Accomodation in Belgium and Lebanon","00:05:00",1,"16-03-2026","5/5",20.67,"","","","","",""],["Yaseen Ahammed Sajeer","10C","2. Federalism","Diagnostic test","00:09:00",1,"20-04-2026","9/9",8.7,"","","","","",""],["ABDUL HADI MEHTHASH","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",1,"21-05-2026","10/10",46.83,"","","","","",""],["Adnan Ashfaq Ahmed Banvasi","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",1,"21-05-2026","3/10",33.17,"","","","","",""],["Afshin Rafeeq","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",3,"21-05-2026","0/10",15.67,"21-05-2026","8/10",5.5,"21-05-2026","10/10",5.17],["AHAMED MAHROOF SHAH","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",1,"21-05-2026","8/10",15.5,"","","","","",""],["Jonathan Joby Kappen","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",1,"21-05-2026","4/10",15.67,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","1. Power Sharing","Diagnostic Test","00:09:00",1,"01-04-2026","7/9",13.89,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","2. Federalism","Diagnostic test","00:09:00",1,"01-04-2026","4/9",18.52,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",1,"21-05-2026","4/10",32.5,"","","","","",""],["Muhammed Faiz","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",2,"21-05-2026","4/10",36.67,"21-05-2026","9/10",8,"","",""],["Muhammed Rayan Chaikalikkandakath","10D","3. Gender, Religion and Caste","Diagnostic Test","00:10:00",1,"21-05-2026","4/10",38.83,"","","","","",""],["ABDUL HADI MEHTHASH","10D","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",1,"17-04-2026","20/20",26.67,"","","","","",""],["ABDUL HADI MEHTHASH","10D","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",3,"17-04-2026","19/20",31.75,"17-04-2026","19/20",22,"17-04-2026","19/20",11.08],["Afshin Rafeeq","10D","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"02-04-2026","9/10",20.56,"","","","","",""],["Afshin Rafeeq","10D","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",1,"02-04-2026","11/20",24.67,"","","","","",""],["AHAMED MAHROOF SHAH","10D","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",1,"17-04-2026","17/20",68.25,"","","","","",""],["AHAMED MAHROOF SHAH","10D","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",1,"17-04-2026","11/20",66.08,"","","","","",""],["Jonathan Joby Kappen","10D","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",1,"02-04-2026","11/20",14.92,"","","","","",""],["Jonathan Joby Kappen","10D","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",2,"09-03-2026","9/10",6.33,"02-04-2026","9/10",5.78,"","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",1,"17-04-2026","15/20",74.33,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",2,"01-04-2026","11/20",44.08,"17-04-2026","11/20",61.83,"","",""],["Muhammed Rayan Chaikalikkandakath","10D","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",1,"17-04-2026","16/20",12,"","","","","",""],["Muhammed Rayan Chaikalikkandakath","10D","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",1,"31-03-2026","13/20",21.5,"","","","","",""],["Sree Ram Thalapilly","10D","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",2,"17-04-2026","5/20",6.17,"17-04-2026","11/20",10.92,"","",""],["Sree Ram Thalapilly","10D","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",1,"17-04-2026","0/20",0.75,"","","","","",""],["ABDUL HADI MEHTHASH","10D","1. A Triumph Of Surgery","Diagnostic Test","00:06:00",2,"02-04-2026","1/6",19.72,"02-04-2026","5/6",11.39,"","",""],["ABDUL HADI MEHTHASH","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",3,"14-10-2026","6/7",28.1,"14-10-2026","6/7",10.71,"14-10-2026","7/7",10.24],["ABDUL HADI MEHTHASH","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",1,"14-10-2026","7/7",25.71,"","","","","",""],["ABDUL HADI MEHTHASH","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"14-10-2026","6/6",24.44,"","","","","",""],["ADHIN ANVER","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",1,"14-10-2026","6/7",39.05,"","","","","",""],["Adnan Ashfaq Ahmed Banvasi","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",2,"14-10-2026","2/7",31.43,"14-10-2026","5/7",9.29,"","",""],["Adnan Ashfaq Ahmed Banvasi","10D","7 (ii) The Tale of Custard the Dragon","Diagnostic Test","00:08:00",1,"14-10-2026","3/8",25.83,"","","","","",""],["Adnan Ashfaq Ahmed Banvasi","10D","8 (i) The Sermon At Benares","Diagnostic Test- The Sermon at Benares","00:05:00",1,"14-10-2026","3/4",26.33,"","","","","",""],["AHAMED MAHROOF SHAH","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",1,"14-10-2026","5/7",15.71,"","","","","",""],["AHAMED MAHROOF SHAH","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"14-10-2026","4/6",24.72,"","","","","",""],["Imran Aziz Azizul Hoque","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",2,"13-10-2026","6/7",90.24,"13-10-2026","0/7",4.05,"","",""],["Imran Aziz Azizul Hoque","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"13-10-2026","6/6",81.11,"","","","","",""],["Jonathan Joby Kappen","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",1,"13-10-2026","6/7",25.24,"","","","","",""],["Jonathan Joby Kappen","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",1,"13-10-2026","6/7",17.14,"","","","","",""],["Jonathan Joby Kappen","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"13-10-2026","5/6",92.5,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",1,"14-10-2026","5/7",50.71,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",1,"14-10-2026","3/7",25,"","","","","",""],["Mohamed Azeem Nalakath Puthanveetil Ashraf","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"14-10-2026","4/6",39.72,"","","","","",""],["Mohammad Arsalan Mohammad Mohtashim","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",2,"14-10-2026","0/7",4.05,"14-10-2026","4/7",40.48,"","",""],["Mohammad Arsalan Mohammad Mohtashim","10D","8 (i) The Sermon At Benares","Diagnostic Test- The Sermon at Benares","00:05:00",1,"14-10-2026","4/4",22,"","","","","",""],["Muhammad Fadhil Saifudheen","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",1,"14-10-2026","7/7",31.9,"","","","","",""],["Muhammed Rayan Chaikalikkandakath","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",1,"14-10-2026","3/7",26.43,"","","","","",""],["Muhammed Rayan Chaikalikkandakath","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"14-10-2026","2/6",38.89,"","","","","",""],["NAZIF AHMED","10D","7 (i) Madam Rides The Bus","Diagnostic Test","00:07:00",1,"14-10-2026","4/7",43.33,"","","","","",""],["Sree Ram Thalapilly","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level I","00:07:00",1,"14-10-2026","6/7",22.14,"","","","","",""],["Sree Ram Thalapilly","10D","7 (i) Madam Rides The Bus","Learning Competency Quiz - Level II","00:06:00",1,"14-10-2026","2/6",41.67,"","","","","",""],["Feba Silvey Varghese","10A","1 (i) A Letter to God","Learning Competency Quiz - Level I","00:12:00",1,"07-04-2026","8/10",19.31,"","","","","",""],["Feba Silvey Varghese","10A","1 (ii) Dust of Snow","Learning Competency Quiz - Level I","00:12:00",1,"09-04-2026","10/10",18.47,"","","","","",""],["Feba Silvey Varghese","10A","1 (ii) Dust of Snow","Learning Competency Quiz - Level II","00:08:00",1,"09-04-2026","4/5",37.29,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","1 (i) A Letter to God","Assessment Test","00:15:00",2,"07-04-2026","1/15",12.22,"07-04-2026","15/15",6,"","",""],["Hanna Fathima Mukkorakkal","10A","1 (ii) Dust of Snow","Assessment Test","00:10:00",1,"07-04-2026","2/10",33.33,"","","","","",""],["AGRIMA SREE .D.H","10A","4. Political Parties","Reinforcement Quiz I - Need of Political Parties","00:05:00",1,"17-09-2026","2/5",35.33,"","","","","",""],["Aiswarya Raj","10A","4. Political Parties","Diagnostic Test","00:10:00",2,"17-09-2026","4/10",46,"17-09-2026","6/10",10,"","",""],["Anaan Rafeek Palakkat Palakkattu Parambil Kunhimoh","10A","1. Power Sharing","Diagnostic Test","00:09:00",1,"07-04-2026","9/9",20.56,"","","","","",""],["Fathima Faiza","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","9/10",39.83,"","","","","",""],["FATHIMA THASLIMA BANU","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","5/10",13.67,"","","","","",""],["Fathwima Shahma","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","7/10",32.33,"","","","","",""],["Feba Silvey Varghese","10A","1. Power Sharing","Diagnostic Test","00:09:00",1,"04-04-2026","9/9",8.33,"","","","","",""],["Feba Silvey Varghese","10A","2. Federalism","Diagnostic test","00:09:00",1,"19-04-2026","9/9",8.33,"","","","","",""],["Feba Silvey Varghese","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","8/10",44,"","","","","",""],["Hanna Kp","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","8/10",31.67,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","1. Power Sharing","Diagnostic Test","00:09:00",3,"03-04-2026","1/9",100,"03-04-2026","4/9",6.67,"03-04-2026","2/9",6.11],["Hanna Fathima Mukkorakkal","10A","2. Federalism","Diagnostic test","00:09:00",1,"03-04-2026","3/9",8.33,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","5/10",31.17,"","","","","",""],["Haripriya Kochukareeparampu","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","7/10",30.5,"","","","","",""],["Manha Bint Ameen","10A","4. Political Parties","Diagnostic Test","00:10:00",1,"17-09-2026","7/10",23.17,"","","","","",""],["Zainab Zia Zia Ur Rehman","10A","4. Political Parties","Diagnostic Test","00:10:00",2,"17-09-2026","7/10",26.17,"17-09-2026","9/10",8.5,"","",""],["Zainab Zia Zia Ur Rehman","10A","2. Federalism","Reinforcement Quiz III - How is Federalism Practised","00:05:00",2,"06-04-2026","2/5",59.33,"06-04-2026","5/5",13.33,"","",""],["Jafia Grace John Christopher","10B","4. Political Parties","Diagnostic Test","00:10:00",1,"18-09-2026","8/10",24.17,"","","","","",""],["Jafia Grace John Christopher","10B","2. Federalism","Reinforcement Quiz III - How is Federalism Practised","00:05:00",3,"01-04-2026","4/5",60.67,"06-04-2026","4/5",27.67,"06-04-2026","5/5",10.33],["NEETA PRASANTH","10B","1. Power Sharing","Diagnostic Test","00:09:00",2,"19-03-2026","0/9",7.22,"19-03-2026","7/9",10.19,"","",""],["NEETA PRASANTH","10B","4. Political Parties","Diagnostic Test","00:10:00",1,"16-09-2026","9/10",20.67,"","","","","",""],["Neha Maria Binu","10B","4. Political Parties","Reinforcement Quiz I - Need of Political Parties","00:05:00",1,"16-09-2026","3/5",57.67,"","","","","",""],["Zainab Mohamed","10B","4. Political Parties","Diagnostic Test","00:10:00",1,"16-09-2026","9/10",18.83,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","1 (iii) Fire and Ice","Diagnostic Test","00:09:00",1,"29-09-2026","3/9",17.22,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","2 (i) Nelson Mandela - Long Walk To Freedom","Diagnostic Test","00:07:00",1,"29-09-2026","4/7",12.62,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","2 (ii) A Tiger in the Zoo","Diagnostic Test","00:09:00",1,"29-09-2026","3/8",15,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","3 (i) Two Stories About Flying: His First Flight","Diagnostic Test","00:08:00",1,"29-09-2026","6/8",13.33,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","3 (ii) Two Stories About Flying: Black Aeroplane","Diagnostic Test","00:08:00",1,"29-09-2026","4/8",14.58,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","3 (iii) How to Tell Wild Animals","Diagnostic Test","00:08:00",1,"29-09-2026","8/8",12.71,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","3 (iv) The Ball Poem","Diagnostic Test","00:07:00",1,"29-09-2026","7/7",15.24,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","4 (i) From The Diary Of Anne Frank","Diagnostic Test","00:07:00",1,"29-09-2026","5/7",10.24,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","4 (ii) Amanda!","Diagnostic Test","00:07:00",1,"29-09-2026","5/7",9.05,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","5 (i) Glimpses Of India - A Baker from Goa","Diagnostic Test","00:07:00",1,"29-09-2026","6/7",27.62,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","5 (ii) Glimpses of India - Coorg","Diagnostic Test","00:05:00",1,"29-09-2026","2/5",18,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","5 (iii) Glimpses of India - Tea from Assam","Diagnostic Test","00:06:00",1,"29-09-2026","4/6",10.83,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","6 (i) Mijbil The Otter","Diagnostic Test","00:07:00",1,"29-09-2026","2/7",13.1,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","6 (ii) Fog","Diagnostic Test","00:07:00",1,"29-09-2026","4/7",11.19,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","9 The Proposal","Diagnostic Test","00:07:00",1,"29-09-2026","4/7",15,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","1 (i) A Letter to God","Diagnostic Test - A Letter to God","00:06:00",1,"29-09-2026","5/6",16.39,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","1 (ii) Dust of Snow","Diagnostic Test - Dust of Snow","00:07:00",1,"29-09-2026","6/7",19.29,"","","","","",""],["Anamika Anoop","10B","1. A Triumph Of Surgery","Learning Competency Quiz - Level I","00:12:00",1,"02-04-2026","9/10",63.75,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","1. A Triumph Of Surgery","Diagnostic Test","00:06:00",1,"29-09-2026","4/6",17.5,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","2. The Thief\u2019s Story","Diagnostic Test","00:05:00",1,"29-09-2026","3/5",14,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","3. The Midnight Visitor","Diagnostic Test","00:06:00",1,"29-09-2026","4/6",23.61,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","4. A Question Of Trust","Diagnostic Test","00:06:00",1,"29-09-2026","4/6",14.72,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","5. Footprints Without Feet","Diagnostic Test","00:08:00",1,"29-09-2026","4/8",9.17,"","","","","",""],["JASIYA ABDULLAH AL ANMAN","10B","6. The Making Of a Scientist","Diagnostic Test","00:07:00",1,"29-09-2026","7/7",18.57,"","","","","",""],["Aiswarya Raj","10A","03 Metals and Non - Metals","Diagnostic Test","00:20:00",2,"19-05-2026","1/20",8,"19-05-2026","12/20",5.42,"","",""],["Aiswarya Raj","10A","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",2,"01-04-2026","3/10",2.89,"01-04-2026","10/10",3.44,"","",""],["Aiswarya Raj","10A","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",3,"30-03-2026","2/20",2.33,"30-03-2026","16/20",8.92,"05-05-2026","12/20",75],["Fathima Faiza","10A","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"01-04-2026","10/10",33.44,"","","","","",""],["FATHIMA THASLIMA BANU","10A","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",1,"07-04-2026","14/20",24.58,"","","","","",""],["Feba Silvey Varghese","10A","02 Acids, Bases and Salts","Diagnostic Test","00:20:00",2,"03-04-2026","15/20",28.42,"03-04-2026","19/20",7.08,"","",""],["Feba Silvey Varghese","10A","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",3,"08-03-2026","7/10",10.11,"09-03-2026","10/10",5.44,"01-04-2026","9/10",12.22],["Feba Silvey Varghese","10A","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",2,"30-03-2026","14/20",4.83,"30-03-2026","13/20",69.33,"","",""],["Feba Silvey Varghese","10A","05 Life Processes","Reinforcement Quiz- How do Organisms obtain their Nutrition","00:10:00",1,"08-03-2026","2/5",21.33,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","09 Light - Reflection and Refraction","Diagnostic Test","00:10:00",1,"03-04-2026","3/15",7.83,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"03-04-2026","6/10",24,"","","","","",""],["Hanna Fathima Mukkorakkal","10A","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",2,"03-04-2026","6/20",18.17,"07-04-2026","6/20",6.5,"","",""],["Hanna Fathima Mukkorakkal","10A","01 Chemical Reactions and Equations","Reinforcement Quiz - Displacement and Double displacement Reactions","00:05:00",1,"03-04-2026","4/5",5.33,"","","","","",""],["Haripriya Kochukareeparampu","10A","05 Life Processes","Diagnostic Test- Life Processes","00:15:00",1,"06-04-2026","10/10",31.33,"","","","","",""],["Haripriya Kochukareeparampu","10A","01 Chemical Reactions and Equations","Diagnostic test.","00:20:00",1,"06-04-2026","10/20",39.5,"","","","","",""]]},"HEAD":["Name","Section","Chapter","Test Name","Ideal Test Time (Minutes)","No. of Attempts","Attempt 1 Date","Attempt 1 Mark / Total","Attempt 1 Time %","Attempt 2 Date","Attempt 2 Mark / Total","Attempt 2 Time %","Attempt 3 Date","Attempt 3 Mark / Total","Attempt 3 Time %"],"META":{"10":{"gradeLabel":"10","package":"NCERT 10 with CBQ","subject":"First Flight 10, Foot Prints Without Feet 10, Mathematics, Political Science 10, Science - 10","file":"14 export workbook(s)","downloaded":"23-10-2026"}},"X":[],"U":[["10","Anaan Rafeek Palakkat Palakkattu Parambil Kunhimoh","10A"],["10","Hanna Kp","10A"],["10","Huda Naser Bahashwan","10B"],["10","Muneeba Shahid","10B"]],"BAND":{"10|10A|AGRIMA SREE .D.H":{"adm":"6683","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":85.0,"Science":85.0,"English":100.0,"Mathematics":90.0},"all":"High","avg":90.0},"10|10A|Afaf Azhar Muhammad Azhar":{"adm":"4288","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":100.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":100.0},"10|10A|Aiswarya Raj":{"adm":"4222","subj":{"Social Science":"Middle","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":55.0,"Science":65.0,"English":95.0,"Mathematics":75.0},"all":"Middle","avg":72.5},"10|10A|Ameneh Ali Bastan":{"adm":"4790","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":90.0,"Science":95.0,"English":91.9,"Mathematics":71.7},"all":"High","avg":87.2},"10|10A|Ameya Sadhiq":{"adm":"4538","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":85.0,"English":85.0,"Mathematics":80.0},"all":"High","avg":87.5},"10|10A|Anaan Rafeeq Palakkat":{"adm":"5889","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":90.0,"Science":85.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":93.8},"10|10A|Anamika Anoop":{"adm":"5764","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":100.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":100.0},"10|10A|Anushka A P":{"adm":"5465","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"Low"},"score":{"Social Science":67.6,"Science":76.2,"English":87.5,"Mathematics":47.2},"all":"Middle","avg":69.6},"10|10A|Asna Lulu Abdul Azeez":{"adm":"4255","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":85.0,"Science":95.0,"English":89.2,"Mathematics":70.8},"all":"High","avg":85.0},"10|10A|Bibi Ayesha Waleed Gul":{"adm":"4880","subj":{"Social Science":"Middle","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":70.6,"Science":58.8,"English":87.5,"Mathematics":55.6},"all":"Middle","avg":68.1},"10|10A|Dua Zahra":{"adm":"6371","subj":{"Science":"High","English":"High","Mathematics":"High"},"score":{"Science":95.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":98.3},"10|10A|FATHIMA THASLIMA BANU":{"adm":"6790","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":85.0,"Science":80.0,"English":91.9,"Mathematics":90.0},"all":"High","avg":86.7},"10|10A|FATHIMATH FIDHA YEROL":{"adm":"7207","subj":{"Social Science":"Middle","English":"Middle","Mathematics":"Low"},"score":{"Social Science":58.8,"English":68.8,"Mathematics":44.4},"all":"Middle","avg":57.3},"10|10A|FATIMA ABID":{"adm":"6842","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":65.0,"Science":95.0,"English":84.2,"Mathematics":57.5},"all":"High","avg":75.4},"10|10A|Fathima Faiza":{"adm":"4813","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":80.0,"English":89.2,"Mathematics":78.3},"all":"High","avg":86.9},"10|10A|Fathima Ridha":{"adm":"6721","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":76.5,"Science":81.2,"English":100.0,"Mathematics":78.6},"all":"High","avg":84.1},"10|10A|Fathwima Shahma":{"adm":"5896","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":90.0,"Science":55.0,"English":91.9,"Mathematics":65.0},"all":"High","avg":75.5},"10|10A|Feba Silvey Varghese":{"adm":"3937","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":80.0,"English":100.0,"Mathematics":95.0},"all":"High","avg":93.8},"10|10A|HIBA FATHIMA.P":{"adm":"6980","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":79.2,"Science":70.0,"English":81.9,"Mathematics":70.0},"all":"High","avg":75.3},"10|10A|Hamdha Vadakkarakath":{"adm":"4987","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":95.0,"Science":55.0,"English":89.4,"Mathematics":75.0},"all":"High","avg":78.6},"10|10A|Hanfa Shahreen Thottasseri":{"adm":"5008","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"Low"},"score":{"Social Science":76.5,"Science":67.4,"English":90.6,"Mathematics":33.3},"all":"Middle","avg":67.0},"10|10A|Hanna Fathima Mukkorakkal":{"adm":"5870","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":95.0,"Science":95.0,"English":89.4,"Mathematics":70.0},"all":"High","avg":87.3},"10|10A|Hanna Koyakkatti Parambil":{"adm":"5149","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"High"},"score":{"Social Science":95.0,"Science":65.0,"English":97.5,"Mathematics":100.0},"all":"High","avg":89.4},"10|10A|Haripriya Kochukareeparampu":{"adm":"5792","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":95.0,"Science":80.0,"English":95.0,"Mathematics":88.3},"all":"High","avg":89.6},"10|10A|Hessa Morad Bakhsh Chakeri":{"adm":"4235","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":79.4,"Science":84.1,"English":100.0,"Mathematics":81.1},"all":"High","avg":86.2},"10|10A|Huda Nasar":{"adm":"5945","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":82.4,"Science":91.6,"English":100.0,"Mathematics":67.2},"all":"High","avg":85.3},"10|10A|Husna Khalil Khalil":{"adm":"3798","subj":{"Social Science":"Low","Science":"High","English":"Middle","Mathematics":"Middle"},"score":{"Social Science":41.2,"Science":92.1,"English":75.0,"Mathematics":70.3},"all":"Middle","avg":69.7},"10|10A|JASIYA ABDULLAH AL ANMAN":{"adm":"6303","subj":{"Social Science":"High","Science":"Low","English":"Middle","Mathematics":"Middle"},"score":{"Social Science":82.4,"Science":45.1,"English":73.8,"Mathematics":65.3},"all":"Middle","avg":66.7},"10|10A|Jafia Grace John Christopher":{"adm":"5920","subj":{"Science":"High","Mathematics":"High"},"score":{"Science":80.0,"Mathematics":100.0},"all":"High","avg":90.0},"10|10A|MINHA FATHIMA .P":{"adm":"6337","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":76.5,"Science":84.1,"English":100.0,"Mathematics":80.6},"all":"High","avg":85.3},"10|10A|MUNIBA SHAHID":{"adm":"6535","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":70.6,"Science":84.6,"English":96.9,"Mathematics":54.4},"all":"High","avg":76.6},"10|10A|Manha Bint Ameen":{"adm":"5855","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":95.0,"Science":95.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":97.5},"10|10A|NAFEESA CHERATTIYATT":{"adm":"7598","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":82.4,"Science":87.5,"English":94.7,"Mathematics":78.9},"all":"High","avg":85.9},"10|10A|NEETA PRASANTH":{"adm":"6887","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":88.2,"Science":94.6,"English":96.9,"Mathematics":67.8},"all":"High","avg":86.9},"10|10A|Neha Maria Binu":{"adm":"4828","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":94.1,"Science":82.5,"English":92.1,"Mathematics":97.2},"all":"High","avg":91.5},"10|10A|RESHMA AHTESHAM":{"adm":"6879","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":94.1,"Science":92.1,"English":100.0,"Mathematics":78.9},"all":"High","avg":91.3},"10|10A|SIMRA MUZAMMIL DABIR":{"adm":"6258","subj":{"Social Science":"Middle","Science":"High","English":"Middle","Mathematics":"Middle"},"score":{"Social Science":70.6,"Science":97.5,"English":56.2,"Mathematics":75.0},"all":"Middle","avg":74.8},"10|10A|Sheza Fathima Arthi Kunnath":{"adm":"5264","subj":{"Social Science":"Middle","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":75.0,"Science":58.8,"English":81.9,"Mathematics":72.5},"all":"Middle","avg":72.0},"10|10A|Subiksha Selvendran":{"adm":"5519","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":95.0,"Science":85.0,"English":100.0,"Mathematics":90.0},"all":"High","avg":92.5},"10|10A|Zainab Mohamed":{"adm":"5912","subj":{"Social Science":"High","Science":"High","Mathematics":"High"},"score":{"Social Science":88.2,"Science":100.0,"Mathematics":94.4},"all":"High","avg":94.2},"10|10A|Zainab Zia Zia Ur Rehman":{"adm":"5119","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"High"},"score":{"Social Science":95.0,"Science":75.0,"English":100.0,"Mathematics":95.0},"all":"High","avg":91.2},"10|10C|Abel John Blassan":{"adm":"6743","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":100.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":100.0},"10|10C|Adnan Bainullah Khan":{"adm":"4546","subj":{"Social Science":"High","Science":"Middle","English":"High","Mathematics":"Middle"},"score":{"Social Science":100.0,"Science":72.2,"English":94.1,"Mathematics":66.7},"all":"High","avg":83.2},"10|10C|Ahmad Rabeeh Musliamveettil Korissery":{"adm":"4296","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":90.0,"Science":77.8,"English":94.1,"Mathematics":80.0},"all":"High","avg":85.5},"10|10C|Arjun.T.P":{"adm":"7051","subj":{"Social Science":"Middle","Science":"Middle","English":"Middle","Mathematics":"Low"},"score":{"Social Science":68.1,"Science":64.6,"English":63.2,"Mathematics":40.0},"all":"Middle","avg":59.0},"10|10C|Hiran Aakesh":{"adm":"6413","subj":{"Social Science":"High","Science":"High","English":"High"},"score":{"Social Science":100.0,"Science":88.5,"English":94.1},"all":"High","avg":94.2},"10|10C|Ismail Ali Ali":{"adm":"5661","subj":{"Social Science":"High","Science":"High","English":"Middle","Mathematics":"Middle"},"score":{"Social Science":80.0,"Science":88.5,"English":74.3,"Mathematics":60.0},"all":"High","avg":75.7},"10|10C|Jaseel Changaranchola":{"adm":"4613","subj":{"Social Science":"High","Science":"Middle","English":"Middle","Mathematics":"Middle"},"score":{"Social Science":100.0,"Science":61.1,"English":66.5,"Mathematics":63.3},"all":"Middle","avg":72.7},"10|10C|Mohammed Aahil Mohamed Gouse":{"adm":"5210","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":73.8,"Science":83.3,"English":90.0,"Mathematics":60.0},"all":"High","avg":76.8},"10|10C|Muhammed Mujeeb Madambillath":{"adm":"4260","subj":{"Science":"High","English":"High","Mathematics":"Middle"},"score":{"Science":85.1,"English":88.2,"Mathematics":70.0},"all":"High","avg":81.1},"10|10C|Muhammed Shammas Pothuvachola":{"adm":"4227","subj":{"Science":"High","English":"High","Mathematics":"High"},"score":{"Science":91.3,"English":97.2,"Mathematics":80.0},"all":"High","avg":89.5},"10|10C|Omar Bin Mahamood Al Sharabi":{"adm":"6864","subj":{"Science":"High","English":"High","Mathematics":"High"},"score":{"Science":83.3,"English":94.1,"Mathematics":83.3},"all":"High","avg":86.9},"10|10C|Reghuram Thalapilly Ramrajiv Pullakate":{"adm":"5516","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":80.0,"Science":85.8,"English":94.3,"Mathematics":80.0},"all":"High","avg":85.0},"10|10C|Yaseen Ahammed Sajeer":{"adm":"5790","subj":{"Science":"High","Mathematics":"Middle"},"score":{"Science":88.9,"Mathematics":73.3},"all":"High","avg":81.1},"10|10C|Yathindra Bokkena Shanker Bokkena":{"adm":"4230","subj":{"Science":"High"},"score":{"Science":83.3},"all":"High","avg":83.3},"10|10D|ABDUL HADI MEHTHASH":{"adm":"6774","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":100.0,"Science":100.0,"English":100.0,"Mathematics":100.0},"all":"High","avg":100.0},"10|10D|ADHIN ANVER":{"adm":"6765","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":89.5,"Science":88.9,"English":93.8,"Mathematics":100.0},"all":"High","avg":93.0},"10|10D|AHAMED MAHROOF SHAH":{"adm":"7612","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":84.2,"Science":88.9,"English":100.0,"Mathematics":94.4},"all":"High","avg":91.9},"10|10D|Adnan Ashfaq Ahmed Banvasi":{"adm":"6438","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Low"},"score":{"Social Science":94.7,"Science":91.7,"English":93.8,"Mathematics":22.2},"all":"High","avg":75.6},"10|10D|Afshin Rafeeq":{"adm":"5891","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":68.4,"Science":88.9,"English":81.2,"Mathematics":72.2},"all":"High","avg":77.7},"10|10D|IMAN .K.P":{"adm":"6862","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":63.2,"Science":85.7,"English":100.0,"Mathematics":77.8},"all":"High","avg":81.7},"10|10D|Imran Aziz Azizul Hoque":{"adm":"5040","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":88.5,"Science":83.3,"English":93.8,"Mathematics":88.9},"all":"High","avg":88.6},"10|10D|Jonathan Joby Kappen":{"adm":"5490","subj":{"Social Science":"High"},"score":{"Social Science":94.7},"all":"High","avg":94.7},"10|10D|MUHAMMED RINAS .A.S":{"adm":"7319","subj":{"Social Science":"Middle","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":73.7,"Science":77.6,"English":89.7,"Mathematics":71.5},"all":"High","avg":78.1},"10|10D|Mohamed Azeem Nalakath Puthanveetil Ashraf":{"adm":"4584","subj":{"Social Science":"High","Science":"High"},"score":{"Social Science":84.2,"Science":94.4},"all":"High","avg":89.3},"10|10D|Mohammad Arsalan Mohammad Mohtashim":{"adm":"5799","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":78.9,"Science":83.3,"English":100.0,"Mathematics":88.9},"all":"High","avg":87.8},"10|10D|Mohammad Irfan":{"adm":"6679","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":91.1,"Science":90.1,"English":93.8,"Mathematics":88.9},"all":"High","avg":91.0},"10|10D|Muhammad Fadhil Saifudheen":{"adm":"6227","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":84.9,"Science":97.2,"English":96.4,"Mathematics":100.0},"all":"High","avg":94.6},"10|10D|Muhammed Faiz":{"adm":"6440","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"High"},"score":{"Social Science":84.2,"Science":83.3,"English":100.0,"Mathematics":83.3},"all":"High","avg":87.7},"10|10D|Muhammed Hanan Chalil Parambil":{"adm":"5811","subj":{"Social Science":"High","Science":"High","English":"High","Mathematics":"Middle"},"score":{"Social Science":92.1,"Science":94.4,"English":93.8,"Mathematics":66.7},"all":"High","avg":86.8},"10|10D|Muhammed Rayan Chaikalikkandakath":{"adm":"4242","subj":{"Social Science":"Middle","Science":"High","English":"High"},"score":{"Social Science":73.7,"Science":100.0,"English":93.8},"all":"High","avg":89.2},"10|10D|NAZIF AHMED":{"adm":"6951","subj":{"Social Science":"High","Science":"High","English":"High"},"score":{"Social Science":100.0,"Science":86.8,"English":93.8},"all":"High","avg":93.5},"10|10D|Sree Ram Thalapilly":{"adm":"5517","subj":{"Social Science":"High","Science":"High"},"score":{"Social Science":94.7,"Science":77.8},"all":"High","avg":86.2}},"VIA":{"English":"English","Mathematics":"Mathematics","Science":"Science","Social Science":"Social Science"},"T":{"META":{"school":"Metropolitan International Indian Private School, Umm Al Quwain","captured":"2026-10-23","filter":"all observers","basis":"latest accepted observation per teacher","counter":62,"accounts":140,"partial":true},"R":[["Falasteen Hassan Ahmad",1,80.0],["Pallavi",1,77.0],["Greeshma Cc",2,75.0],["Aparna",1,73.0],["Rasak",1,73.0],["Fathima Raheela",1,72.0],["Abdul Nazir P",1,71.0],["Rangeena Rajeesh",1,71.0],["Shonima",1,71.0],["Sreenidhi Sanu",1,71.0],["Shafeeque Palat",1,70.0],["Fathima Jannah Navaz",1,69.0],["Haseena Muhammed Roshin",1,69.0],["Lawahiz Elsayed Mohammed",1,69.0],["MUHAMMED SHANIR PM",1,69.0],["Naseeha",2,69.0],["Risvana KM",1,69.0],["Samina Irshad",1,69.0],["NASEEHA N",2,68.0],["Shamnas Fajeesh",1,68.0],["Chaithra Sajeev",1,67.0],["Kanza",2,67.0],["Jasni Jamal",1,66.0],["Muhammed Shaheem",1,66.0],["Aswathy Chozhirakath Shanmughan",1,64.0],["ATHIRA SUDHAKARAN",3,63.0],["Jeethu Thomas",2,63.0],["Shaija",1,63.0],["Alia Aslam",1,62.0],["Alphonsa Joseph",1,61.0],["Ayishathu Sadiya",1,61.0],["Baviya Balasubramaniam",1,61.0],["Noora basheer",1,61.0],["Ruksana Keedath",1,61.0],["Ahalya k",1,60.0],["Deepthi sreenivasan",1,60.0],["Faheema shamsheer",1,60.0],["JAHANA SHERIN K",1,60.0],["Sadaf Afsheen",1,60.0],["Fabna Faizal",2,59.0],["Fathimath Afnitha AP",1,59.0],["Deepika Anilkumar",1,58.0],["Heena Kowsar",1,58.0],["Preetha Jayakrishnan",1,58.0],["Anila",1,57.0],["Jancy",1,57.0],["Jesna.A.P",1,57.0],["Maria Naz",2,56.0],["Fathima Fahmidha. M",1,55.0],["Jabir Thailakkandy",2,55.0],["Linsa",2,55.0],["Remya Johny",1,55.0],["Am Ayshath Shahama",1,51.0],["Architha K R",2,51.0],["Athira",1,43.0],["Krishna Priya S",1,42.0]],"P":[["Lesson Plan","D1",0,0,22,36,4,0],["Student Learning Profiles","D1",0,0,17,33,12,0],["Teaching Aids","D1",0,4,27,27,4,0],["Starter","D2",0,0,31,25,5,1],["Lesson / Learning Objective(s)","D2",0,2,32,22,6,0],["Learning Environment","D2",0,3,21,35,3,0],["Mastery of subject","D2",0,2,34,25,1,0],["Differentiation & Inclusion","D2",0,0,16,35,10,1],["Questioning Skills & Discussion Techniques","D2",0,1,29,26,6,0],["Integrated and lateral learning","D2",0,0,20,37,5,0],["Technology integration","D2",0,2,22,34,4,0],["Classroom Management","D2",0,3,28,24,7,0],["Communication with Students","D2",0,1,39,20,2,0],["Assessment & Evaluation","D2",0,1,23,32,6,0],["Plenary","D2",0,0,29,21,12,0],["Time Management","D2",0,2,11,28,21,0],["Innovation and Creativity","D2",0,1,19,25,17,0],["Adaptive teaching and Nimbleness","D2",0,2,10,43,7,0],["Teacher Disposition and Attitude","D2",1,1,27,31,2,0],["Learning Experience & Outcome","D3",0,2,21,34,5,0],["Learning Skills","D3",0,1,20,36,5,0],["Student Attitude towards learning","D3",0,3,29,25,5,0],["Student Response","D3",0,3,23,31,5,0],["Student initiative, innovation & independent Learning","D3",1,0,9,39,13,0],["Collaboration","D3",0,3,16,34,9,0]],"U":[["Lubina","lubinanaveen@miipsuaq.com",9.708272],["Sapna","sapna@miipsuaq.com",0.16875],["Nirmala","htlt@nisuaq.com",0.022917],["Salman","library@nisuaq.com",0.0],["Sharmila","sharmilajabin@miipsuaq.com",0.018889],["Ms Shahida","shahida@miips.com",0.083472],["Febna","febna@nisuaq.com",0.259444],["Ayishathu Sadiya","ayishasadiya@miipsuaq.com",0.010556],["Jancy","jancy@nisuaq.com",null],["Preetha Jayakrishnan","preethajayakrishnan@nisuaq.com",0.014722],["Jeethu Thomas","jeethuthomas@nisuaq.com",0.0],["Murshida Kizhakkanatt","murshidakizhakkanatt@miipsuaq.com",3.791667],["Abdul Nazir P","nasir@nisuaq.com",null],["Fathima Jannah","fathimajannah@nisuaq.com",0.322083],["Bibi S John","bibjsjohn@nisuaq.com",0.0],["Linsa","linsa@nisuaq.com",52.43194],["NIS Teacher","teacher.admissions@nisuaq.com",1.196767],["EB Student Counsellor","ebworkshop1@nisuaq.com",null],["Anila","anila@nisuaq.com",0.004167],["Keerthika TG","keerthika@miipsuaq.com",0.016944],["Fathima Raheela","raheela@nisuaq.com",0.227917],["Ahalya k","ahalya@nisuaq.com",0.003542],["Chaithra Sajeev","chaithrasajeev@miipsuaq.com",4.72625],["Maria Naz","marianazmirza@nisuaq.com",0.0],["Heena Kowsar","heenakowsar@nisuaq.com",null],["Sumayya","sumayya@nisuaq.com",null],["Arsha","arsha@nisuaq.com",null],["ATHIRA SUDHAKARAN","athirasudhakaran@nisuaq.com",2.124228],["Muhammed Shaheem","muhammedshaheem@nisuaq.com",0.084722],["Chaithra Sanjeev","chaithrasanjeev@nisuaq.com",null],["Mukhbila Lubina","mukhbilalubna@nisuaq.com",null],["Aswathy Chozhirakath Shanmughan","aswathy@nisuaq.com",null],["Noora basheer","noorabasheer@miipsuaq.com",65.73444],["Jabir","jabir@nisuaq.com",49.02083],["Aparna","aparna@nisuaq.com",0.36875],["Shamnas","shamnas@nisuaq.com",0.825679],["Thasleema","thasleema@nisuaq.com",0.097222],["Surumi P Kabir","surumi@nisuaq.com",24.15486],["Roshna John Casper","roshna@nisuaq.com",null],["Risvana KM","risvanakm@nisuaq.com",null],["Remya","remyajhony@nisuaq.com",null],["Preetha Jayakrishnan","preetha@nisaq.com",null],["Precilla Cutinha","Prescila@nisuaq.com",null],["PRAVEENA V P","praveena@nisuaq.com",null],["NASEEHA","naseehaa@nisuaq.com",10.71],["MUHAMMED SHANIR","muhammedshanir@miipsuaq.com",0.265139],["KIRAN S","kiran@nisuaq.com",null],["JAHANA SHERIN","jahana@nisuaq.com",3.455486],["Irfana Thesni","irfana@nisuaq.com",0.646914],["Deepthi sreenivasan","deepthi@nisuaq.com",0.083333],["Baviya","baviya@nisuaq.com",null],["Architha K R","architha@nisuaq.com",0.07],["Ameena","ameenaansari@nisuaq.com",null],["Abdul","naser@nisuaq.com",156.2428],["LIYAKHATH ALI","liyakathali@nisuaq.com",0.252778],["Sreenidhi Sanu","sreenidhisanu@nisuaq.com",2.661667],["Samina Irshad","samina@nisuaq.com",0.19125],["Shaija","shaija@miipsuaq.com",22.02431],["Sasi G","sasi@nisuaq.com",null],["Thasleema","fathimaththasleema@nisuaq.com",null],["Anjitha","anjitha@nisuaq.com",null],["Shilpa Gopi","shilpagopi@nisuaq.com",null],["RAHU P","rahul@nisuaq.com",null],["Shahitha Shahul","shahithashahul1@gmail.com",null],["Sabeena","sabeenabegum@nisuaq.com",null],["Muhammed Nayeem","Itadmin@nisuaq.com",null],["Biji","biji@nisuaq.com",null],["Basheera","basheera@nisuaq.com",null],["Athira","athirasreenivasan@nisuaq.com",0.095833],["Ansar","ansar@nisuaq.com",null],["Asna Kunduvayil","asna@nisuaq.com",null],["Naseeha","naseeha@miipsuaq.com",0.557292],["Humar Pk","humar@nisuaq.com",null],["Shonima","shonima@nisuaq.com",null],["Pallavi","pallavi@miipsuaq.com",0.139444],["Shafeeque","shafeeque@nisuaq.com",0.063194],["Silpa","silpa@nisuaq.com",null],["Ambili","ambily@nisuaq.com",null],["Riswana K M","risvana@nisuaq.com",0.000694],["Rafeek cm","rafeek@nisuaq.com",null],["Faheema shamsheer","faheemashamseer@nisuaq.com",0.375],["Sanah Hussain","sanahussain@nisuaq.com",2.058125],["Teacher 1","teacher1@nisuaq.com",0.077535],["Suhana Saj M.K","suhanasaj@nisuaq.com",null],["Maha Mohammed","mahamuhammed@nisuaq.com",null],["Abdul Samad","abdulsamad@nisuaq.com",null],["Kadeeja","kadeejalona@nisuaq.com",null],["Murshida Kizhakkanatt","murshida@nisuaq.com",null],["Falasteen Hassan Ahmad","felesteen@nisuaq.com",0.045],["Tabbasum Firoj Mulani","tabassum@nisuaq.com",null],["Fathima Fahmidha","fathimafahmidha@miipsuaq.com",0.245625],["Lawahiz Elsayed Mohammed","lawahiz@nisuaq.com",0.05],["Fathimathul","fathimathulhasna@nisuaq.com",null],["RASAK","razak@nisuaq.com",null],["Mumthaz C","mumthaz@nisuaq.com",null],["Asha Muthu","asha@nisuaq.com",null],["Sandhya","sandhya@nisuaq.com",null],["Sajithamol.OP","sajithamol@nisuaq.com",null],["Arathi","arathipeter@nisuaq.com",null],["Roshnara Shahabas","roshnarashahabas@nisuaq.com",null],["Sabeena.M.P","sabeena@nisuaq.com",7.579444],["Alia","aliaaslam@miipsuaq.com",0.417778],["Laisa.K","laisa@nisuaq.com",5.315],["Mujeeb Rahman","mujeeb@miipsuaq.com",0.041667],["Krishna Priya","krishnapriya@miipsuaq.com",1.005],["Sakkiya","sakkiyanasreen@nisuaq.com",null],["Sobhana.M","shobana@nisuaq.com",null],["Thanuja Shaukkathali","thanujashaukkathali@nisuaq.com",null],["AKHILA","akhila@nisuaq.com",null],["Dhanya","dhanya@nisuaq.com",1.271111],["Surabhi","surabhi@nisuaq.com",17.24333],["Jasni Jamal","jasnijamal@nisuaq.com",0.052963],["Ruksana","ruksana@nisuaq.com",467.5275],["Vidya P.A","vidhya@miipsuaq.com",0.141111],["Sruthi","sruthy@nisuaq.com",null],["Ann Mariya","counsellor@nisuaq.com",null],["Aswin","aswinjose@nisuaq.com",null],["Haseena Muhammed Roshin","haseena@nisuaq.com",null],["Greeshma","greeshma@nisuaq.com",null],["Rangeena Rajeesh","rangeena@nisuaq.com",null],["Sadaf","sadaf@miipsuaq.com",0.174028],["Deepa","deepasreekumari@nisuaq.com",null],["Nivya","nivyavalsan@nisuaq.com",null],["Jithy Varughese","jithy@nisuaq.com",null],["Deepika","deepika@miipsuaq.com",0.244792],["Maneesha","maneeshasyamkumar@nisuaq.com",null],["Nushrath","nusrathbeegam@nisuaq.com",null],["Jijo Saji Eapen","jijosajieapen@nisuaq.com",null],["Abida Pulakkal","abida@nisuaq.com",0.782708],["Jesna.A.P","jesna@nisuaq.com",0.0],["Mercy Joseph","mercyjoseph@nisuaq.com",null],["Jithu","jithu@nisuaq.com",null],["Sreelakshmi Puthenpura","sreelaksshmi@nisuaq.com",null],["Amina Mol Sainudeen Kutty","amina@nisuaq.com",null],["Sharmin","sharmin@nisuaq.com",29.53333],["Anu","anu@miipsuaq.com",1.156944],["Asma Batool","asmabatool@nisuaq.com",null],["Sulfath Beevi","academic@nisuaq.com",null],["Mary Brigeet","viceprincipal@nisuaq.com",null],["SAIFUDHEEN P","principal@miipsuaq.com",null]]},"USAGE":{"HIBA FATHIMA.P":0.016,"AGRIMA SREE .D.H":0.638,"FATHIMA THASLIMA BANU":0.023,"FATIMA ABID":0.455,"Zainab Zia Zia Ur Rehman":0.128,"Haripriya Kochukareeparampu":4.088,"Hanna Koyakkatti Parambil":0.058,"Fathwima Shahma":0.037,"Aiswarya Raj":0.171,"Subiksha Selvendran":0.01,"Manha Bint Ameen":0.067,"Hanna Fathima Mukkorakkal":1.833,"Feba Silvey Varghese":1.006,"Fathima Faiza":1.622,"Ameya Sadhiq":0.012,"Afaf Azhar Muhammad Azhar":0.058,"NEETA PRASANTH":0.618,"JASIYA ABDULLAH AL ANMAN":0.178,"Jafia Grace John Christopher":11.765,"Hessa Morad Bakhsh Chakeri":0.0,"Zainab Mohamed":0.023,"Neha Maria Binu":0.04,"Huda Nasar":0.01,"Anamika Anoop":0.4,"Abel John Blassan":0.01,"Omar Bin Mahamood Al Sharabi":0.176,"Hiran Aakesh":5.413,"Yathindra Bokkena Shanker Bokkena":1.311,"Yaseen Ahammed Sajeer":0.666,"Reghuram Thalapilly Ramrajiv Pullakate":0.051,"Muhammed Shammas Pothuvachola":0.217,"Muhammed Mujeeb Madambillath":0.452,"Ismail Ali Ali":0.231,"Adnan Bainullah Khan":0.523,"AHAMED MAHROOF SHAH":0.195,"ADHIN ANVER":0.081,"ABDUL HADI MEHTHASH":0.39,"Adnan Ashfaq Ahmed Banvasi":0.15,"Muhammad Fadhil Saifudheen":0.03,"Sree Ram Thalapilly":0.127,"Muhammed Rayan Chaikalikkandakath":0.229,"Mohammad Arsalan Mohammad Mohtashim":0.051,"Jonathan Joby Kappen":0.206}};
+const CUTOFF = "LA is below 50, MA is 50 to 75, HA is above 75, taken from the UT-01 and UT-02 unit tests rather than an internal total.";
+const $ = (id) => document.getElementById(id);
+const nf = new Intl.NumberFormat('en');
+const pct = (x) => (x * 100).toFixed(0) + '%';
+const t2 = (v) => (typeof v === 'number' ? String(Math.round(v * 100) / 100) : String(v));
+const secSort = (a, b) => a.localeCompare(b, 'en', { numeric: true });
+const testSort = (a, b) => (/^mock/i.test(b) - /^mock/i.test(a)) || a.localeCompare(b, 'en', { numeric: true });
+const uniq = (a) => [...new Set(a)];
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const mean = (a) => (a.length ? a.reduce((s, x) => s + x, 0) / a.length : 0);
+const key = (s) => s.name + '|' + s.sec;
+/* students on roll: school-provided strength; if a section has no figure, the number of students in the export is used */
+const rollOf = (g, sec, known) => (ROLL[g] && ROLL[g][sec] != null ? ROLL[g][sec] : known);
+function rollTotal(g, sec, lvl) {
+  if (lvl === undefined) lvl = S.lvl;
+  if (lvl) return students(sec, lvl).length;   // the cohort itself is the denominator
+  const secs = sec ? [sec] : [...new Set(DATA.S.filter((x) => x[0] === g).map((x) => x[2]))];
+  return secs.reduce((t, s2) => t + rollOf(g, s2, DATA.S.filter((x) => x[0] === g && x[2] === s2).length), 0);
+}
+
+/* ---------- data ---------- */
+const roster = {};
+DATA.S.forEach(([g, name, sec, no]) => (roster[g] ||= []).push({ name, sec, no }));
+/* students who took a test but whose IBT name was not found in the class list */
+const unlisted = (g, sec) => (DATA.U || []).filter((u) => u[0] === g && (!sec || u[2] === sec)).map(([, name, s2]) => ({ name, sec: s2, unlisted: true }));
+const att = DATA.A.map(([g, subj, test, name, sec, orig, ideal, n, tries, chap]) => ({ g, subj, test, name, sec, orig, ideal, n, tries, chap: chap || '' }));
+const SEP = '\u001f';
+/* a test is identified by its chapter as well as its name */
+const tkey = (a) => a.subj + SEP + a.chap + SEP + a.test;
+const grades = Object.keys(roster).sort((a, b) => a - b);
+$('asOf').textContent = DATA.META[grades[0]].downloaded;
+
+/* S.subj = '' means all subjects, S.test = '' means all tests */
+const S = { g: grades[0], sec: '', subj: '', chap: '', test: '', lvl: '' };
+const ALL_TESTS = () => !S.test;
+const LEVELS = ['High', 'Middle', 'Low'];
+/* The school grades its students HA / MA / LA. Those are the labels shown everywhere;
+   the long form appears only where there is room for it. */
+const TAG = { High: 'HA', Middle: 'MA', Low: 'LA' };
+const where = () => `Grade ${S.g}` + (S.sec ? `, Section ${S.sec}` : ', all sections')
+  + (S.lvl ? `, ${TAG[S.lvl]}` : '');
+/* Level comes from the school's own marks. With a subject chosen it is that subject's band
+   (for a stream subject, the core subject it maps to); otherwise the band of the average. */
+const VIA = DATA.VIA || {};
+const bandRec = (s) => DATA.BAND[S.g + '|' + s.sec + '|' + s.name] || null;
+/* a grade with no internal marks at all has no class list behind it */
+const gradeHasBands = (g) => DATA.S.some(([gg, n, sec]) =>
+  gg === g && (DATA.BAND[g + '|' + sec + '|' + n] || {}).all);
+const viaOf = (subj) => (subj ? (VIA[subj] || null) : null);
+function bandOf(s, subj = S.subj) {
+  const b = bandRec(s); if (!b) return null;
+  const v = viaOf(subj);
+  if (subj && v && b.subj[v]) return b.subj[v];
+  if (subj && v) return null;
+  return b.all || null;
+}
+function bandNote(s, subj = S.subj) {
+  const b = bandRec(s); if (!b) return '';
+  const v = viaOf(subj);
+  if (subj && v && b.score[v] != null) return `${v}: ${b.score[v]} / 100`;
+  if (!subj && b.avg != null) return `Average across subjects: ${b.avg} / 100`;
+  return 'No mark recorded';
+}
+const lvlTag = (s, subj = S.subj) => {
+  const v = bandOf(s, subj);
+  const e = el('span', 'lvl ' + (v || 'none'), v ? TAG[v] : '—');
+  e.title = bandNote(s, subj);
+  return e;
+};
+
+/* students of the current grade, optionally limited to a section */
+const students = (sec = S.sec, lvl = S.lvl) => roster[S.g]
+  .filter((s) => (!sec || s.sec === sec) && (!lvl || bandOf(s) === lvl))
+  .sort((a, b) => secSort(a.sec, b.sec) || a.no - b.no);
+const bySecName = (a, b) => secSort(a.sec, b.sec) || (a.no || 999) - (b.no || 999) || a.name.localeCompare(b.name);
+/* list of [subject, test] in the current grade, optionally one subject */
+const chapterList = (subj = S.subj) => uniq(att
+  .filter((a) => a.g === S.g && (!subj || a.subj === subj) && a.chap)
+  .map((a) => a.chap)).sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+/* [subject, chapter, test] triples, narrowed by the chosen subject and chapter */
+const testList = (subj = S.subj, chap = S.chap) => {
+  const subs = uniq(att.filter((a) => a.g === S.g).map((a) => a.subj)).sort();
+  return subs.filter((x) => !subj || x === subj).flatMap((x) =>
+    uniq(att.filter((a) => a.g === S.g && a.subj === x && (!chap || a.chap === chap))
+      .map((a) => a.chap + SEP + a.test))
+      .sort((p, q) => testSort(p.split(SEP)[1], q.split(SEP)[1])
+        || p.localeCompare(q, 'en', { numeric: true }))
+      .map((ct) => [x, ct.split(SEP)[0], ct.split(SEP)[1]]));
+};
+/* one test: who took it (with their entries) and who did not */
+function oneTest(subj, chap, test, sec = S.sec, lvl = S.lvl) {
+  const all = students(sec, lvl), map = new Map();
+  att.forEach((a) => {
+    if (a.g !== S.g || a.subj !== subj || a.test !== test || (chap && a.chap !== chap)
+        || (sec && a.sec !== sec)) return;
+    const k = key(a); if (!map.has(k)) map.set(k, []); map.get(k).push(a);
+  });
+  const took = [], not = [];
+  all.forEach((s) => { const e = map.get(key(s)); e ? took.push({ ...s, e }) : not.push(s); });
+  const extra = []; took.sort(bySecName);
+  const total = rollTotal(S.g, sec, lvl);
+  return { all, took, not, total, notN: total - took.length, unnamed: total - all.length, unl: extra.length, rate: total ? took.length / total : 0 };
+}
+/* many tests: per student how many of the tests they attempted */
+function manyTests(subj = S.subj, sec = S.sec, lvl = S.lvl, chap = S.chap) {
+  const listed = students(sec, lvl), extra = [], tests = testList(subj, chap);
+  const all = [...listed, ...extra], done = new Map(all.map((s) => [key(s), new Set()]));
+  att.forEach((a) => {
+    if (a.g !== S.g || (subj && a.subj !== subj) || (chap && a.chap !== chap)
+        || (sec && a.sec !== sec)) return;
+    const k = key(a); if (done.has(k)) done.get(k).add(tkey(a));
+  });
+  const rows = all.map((s) => ({ ...s, count: done.get(key(s)).size })).filter((r) => !r.unlisted || r.count > 0).sort(bySecName);
+  const some = rows.filter((r) => r.count > 0), none = rows.filter((r) => r.count === 0);
+  const rates = tests.map(([x, c, t]) => oneTest(x, c, t, sec, lvl).rate);
+  const total = rollTotal(S.g, sec, lvl);
+  return { all: rows, some, none, tests, avg: mean(rates), total, noneN: total - some.length, unnamed: total - listed.length, unl: rows.filter((r) => r.unlisted).length };
+}
+
+/* ---------- filters ---------- */
+function fill(sel, opts, val, label = (o) => o) {
+  sel.replaceChildren(...opts.map((o) => new Option(label(o), o)));
+  sel.value = val;
+}
+function update(patch) {
+  Object.assign(S, patch);
+  const secs = uniq(roster[S.g].map((s) => s.sec)).sort(secSort);
+  if (S.sec && !secs.includes(S.sec)) S.sec = '';
+  const subs = uniq(att.filter((a) => a.g === S.g).map((a) => a.subj)).sort();
+  if (S.subj && !subs.includes(S.subj)) S.subj = '';
+  const chaps = chapterList(S.subj);
+  if (S.chap && !chaps.includes(S.chap)) S.chap = '';
+  const tests = S.subj ? testList(S.subj, S.chap) : [];
+  if (!S.subj || (S.test && !tests.some(([, c, t]) => t === S.test && c === S.chap))) S.test = '';
+  fill($('fGrade'), grades, S.g, (g) => 'Grade ' + g);
+  fill($('fSection'), ['', ...secs], S.sec, (s) => (s ? 'Section ' + s : 'All sections'));
+  fill($('fSubject'), ['', ...subs], S.subj, (s) => s || 'All subjects');
+  fill($('fLevel'), ['', ...LEVELS], S.lvl, (l) => (l ? TAG[l] : 'All levels'));
+  fill($('fChapter'), ['', ...chaps], S.chap, (c) => c || 'All chapters');
+  const topt = ['', ...tests.map(([, c, t]) => c + SEP + t)];
+  fill($('fTest'), topt, S.test ? S.chap + SEP + S.test : '', (v) => {
+    if (!v) return 'All tests';
+    const [c, t] = v.split(SEP);
+    return S.chap ? t : t + ' — ' + c;      // name alone is ambiguous across chapters
+  });
+  $('fTest').disabled = !S.subj;
+  $('fTest').title = S.subj ? '' : 'Choose a subject to pick a single test';
+  render();
+}
+$('fGrade').onchange = (e) => update({ g: e.target.value, sec: '' });
+$('fSection').onchange = (e) => update({ sec: e.target.value });
+$('fSubject').onchange = (e) => update({ subj: e.target.value, chap: '', test: '' });
+$('fChapter').onchange = (e) => {
+  const c = e.target.value;
+  // With no subject chosen the list spans every subject, but a chapter belongs to exactly
+  // one of them, so picking a chapter settles the subject as well.
+  const owners = c ? uniq(att.filter((a) => a.g === S.g && a.chap === c).map((a) => a.subj)) : [];
+  update({ chap: c, test: '', subj: owners.length === 1 ? owners[0] : S.subj });
+};
+$('fLevel').onchange = (e) => update({ lvl: e.target.value });
+$('fTest').onchange = (e) => {
+  const v = e.target.value;
+  if (!v) return update({ test: '' });
+  const [c, t] = v.split(SEP);
+  update({ chap: c, test: t });     // picking a test pins its chapter
+};
+$('qTook').oninput = () => drawTook(oneTest(S.subj, S.chap, S.test).took);
+$('qNot').oninput = () => drawNot(oneTest(S.subj, S.chap, S.test).not);
+const goTop = () => $('bSummary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+/* ---------- helpers ---------- */
+const progress = (r) => {
+  const d = el('div', 'prog'), m = el('div', 'm'), s = el('span');
+  s.style.width = (r * 100).toFixed(1) + '%'; m.append(s); d.append(m, el('em', null, pct(r))); return d;
+};
+const td = (tr, text, cls) => { const c = tr.insertCell(); if (cls) c.className = cls; if (text != null) c.textContent = text; return c; };
+const emptyRow = (tbody, cols, text) => { const tr = tbody.insertRow(); tr.className = 'empty'; const c = tr.insertCell(); c.colSpan = cols; c.textContent = text; };
+const link = (tr, fn, label) => {
+  if (label) td(tr, null, 'r').append(el('span', 'go', label));
+  tr.tabIndex = 0; tr.onclick = fn;
+  tr.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); } };
+};
+const header = (row, cols) => row.replaceChildren(...cols.map(([t, cls, w]) => { const th = el('th', cls, t); if (w) th.style.width = w; return th; }));
+
+/* ---------- render ---------- */
+function render() {
+  const single = !ALL_TESTS();
+  // crumbs (each level is clickable to go back up)
+  const cr = $('crumbs'); cr.replaceChildren();
+  const levels = [['Grade ' + S.g, { sec: '', subj: '', test: '' }]];
+  if (S.sec) levels.push(['Section ' + S.sec, { subj: '', test: '' }]);
+  levels.push([S.subj || 'All subjects', { chap: '', test: '' }]);
+  if (S.chap) levels.push([S.chap, { test: '' }]);
+  if (S.subj) levels.push([S.test || 'All tests', {}]);
+  levels.forEach(([label, patch], i) => {
+    if (i) cr.append(el('i', null, '›'));
+    if (i === levels.length - 1) cr.append(el('span', 'cur', label));
+    else { const b = el('button', null, label); b.type = 'button'; b.onclick = () => update(patch); cr.append(b); }
+  });
+
+  if (single) {
+    const x = oneTest(S.subj, S.chap, S.test);
+    $('hSummary').textContent = 'Test summary';
+    $('pSummary').textContent = `${S.subj} · ${S.chap ? S.chap + ' · ' : ''}${S.test} · ${where()}`;
+    setKpis(x.total, 'Took the test', x.took.length, 'Did not take', x.notN, 'Participation', pct(x.rate), 'Took ÷ students on roll', x.rate);
+    $('def').textContent = '';
+    $('chTook').textContent = nf.format(x.took.length);
+    $('chNot').textContent = nf.format(x.notN);
+    $('qTook').value = ''; $('qNot').value = '';
+    drawTook(x.took); drawNot(x.not, x.unl);
+    if (!S.sec) drawSectionsSingle();
+  } else {
+    const m = manyTests();
+    const r = m.total ? m.some.length / m.total : 0;
+    $('hSummary').textContent = 'Participation summary';
+    $('pSummary').textContent = `${S.subj || 'All subjects'}${S.chap ? ' · ' + S.chap : ''} · ${nf.format(m.tests.length)} tests · ${where()}`;
+    setKpis(m.total, 'Attempted at least one test', m.some.length, 'Attempted no test', m.noneN, 'Average test participation', pct(m.avg), 'Mean of each test’s participation', r);
+    $('def').textContent = (gradeHasBands(S.g) ? '' :
+      `Grade ${S.g} has no class list in the school’s assessment export, so “students on roll” here means students seen in the platform. `)
+      + `“Attempted at least one test” counts students with an attempt in any of the ${nf.format(m.tests.length)} ${S.subj ? S.subj + ' ' : ''}tests. Pick a test to see who took it and their marks.`;
+    if (!S.subj) drawSubjects();
+    if (!S.sec) drawSectionsMany();
+    $('pTests').textContent = S.chap
+      ? 'Tests in this chapter. Click one to see who took it, with their marks, and who did not.'
+      : 'Click a test to see who took it, with their marks, and who did not. The same test name is reused in several chapters, so each row is one test within one chapter.';
+    drawTests(m.tests);
+  }
+  drawLevels(single);
+  if (typeof drawScatter === 'function') drawScatter();
+  const scoped = single || !!(S.subj && S.chap);
+  $('bSummary').hidden = !scoped;
+  $('noChap').hidden = scoped;
+  $('noChapTxt').textContent = (S.subj ? 'Choose a chapter above' : 'Choose a subject and then a chapter above')
+    + ' to see how many girls took its tests. The school works through the chapters across the year, so a'
+    + ' figure spanning every chapter would mostly measure content that has not been taught yet.';
+  $('bSubjects').hidden = single || !!S.subj;
+  $('bSections').hidden = !!S.sec;
+  $('bLevels').hidden = !!S.lvl;
+  $('bTests').hidden = single;
+  $('bTook').hidden = !single;
+  $('bNot').hidden = !single;
+  drawCross();
+  let n = 0;
+  document.querySelectorAll('.block').forEach((b) => { if (!b.hidden) b.querySelector('h2').dataset.n = ++n; });
+
+  // download labels
+  $('dlBtn').title = `Download the uploaded raw data for ${where()} (Excel)`;
+}
+function setKpis(all, tl, t, nl, nv, rl, rv, rh, share) {
+  $('kAll').textContent = nf.format(all);
+  $('kTookL').textContent = tl; $('kTook').textContent = nf.format(t);
+  $('kNotL').textContent = nl; $('kNot').textContent = nf.format(nv);
+  $('kTookP').textContent = all ? pct(t / all) + ' of students' : '';
+  $('kNotP').textContent = all ? pct(nv / all) + ' of students' : '';
+  $('kRateL').textContent = rl; $('kRate').textContent = rv; $('kRateH').textContent = rh;
+  const ring = parseFloat(rv) / 100, C = 2 * Math.PI * 52;
+  $('ringVal').setAttribute('stroke-dasharray', `${(C * ring).toFixed(2)} ${C.toFixed(2)}`);
+}
+
+const chapsReached = (subj, sec) => uniq(att.filter((a) => a.g === S.g
+  && (!subj || a.subj === subj) && (!sec || a.sec === sec))
+  .map((a) => a.subj + SEP + a.chap)).length;
+function drawSubjects() {
+  const tb = $('tSubjects'); tb.replaceChildren();
+  uniq(att.filter((a) => a.g === S.g).map((a) => a.subj)).sort().forEach((subj) => {
+    const m = manyTests(subj, S.sec, '', S.chap);
+    const tr = tb.insertRow();
+    td(tr).append(el('b', null, subj));
+    td(tr, nf.format(chapterList(subj).length), 'r');
+    td(tr, nf.format(m.tests.length), 'r');
+    td(tr, nf.format(m.some.length), 'r tn');
+    td(tr, nf.format(m.noneN), 'r nn');
+    link(tr, () => { update({ subj, test: '' }); goTop(); }, 'Open subject ›');
+  });
+}
+function drawLevels(single) {
+  const tb = $('tLevels'); tb.replaceChildren();
+  $('pLevels').textContent = single
+    ? 'Selected test, by achiever level. Click a level to open it.'
+    : `${S.subj || 'All subjects'}${S.chap ? ' \u00b7 ' + S.chap : ', all chapters'}, by achiever level. Click a level to open it.`;
+  const v = viaOf(S.subj);
+  $('defLevels').textContent = S.subj
+    ? (v ? `HA, MA and LA follow the school's ${v} marks. ${CUTOFF}`
+         : `${S.subj} has no internal mark of its own, so each student's level here is the band of their average across subjects. ${CUTOFF}`)
+    : `With all subjects selected, a student's level follows the average of their internal marks. ${CUTOFF}`;
+  header($('hdLevels'), single
+    ? [['Achiever level'], ['Students', 'r'], ['Took', 'r'], ['Did not take', 'r'], ['Participation', '', '30%'], ['']]
+    : S.chap
+      ? [['Achiever level'], ['Students', 'r'], ['Attempted at least one', 'r'], ['Attempted none', 'r'], ['Average test participation', '', '30%'], ['']]
+      : [['Achiever level'], ['Students', 'r'], ['Attempted at least one', 'r'], ['Attempted none', 'r'], ['']]);
+  let any = false;
+  LEVELS.forEach((lvl) => {
+    const n = students(S.sec, lvl).length;
+    if (!n) return;
+    any = true;
+    const tr = tb.insertRow();
+    td(tr).append(el('span', 'lvl ' + lvl, TAG[lvl]));
+    td(tr, nf.format(n), 'r');
+    if (single) {
+      const x = oneTest(S.subj, S.chap, S.test, S.sec, lvl);
+      td(tr, nf.format(x.took.length), 'r tn');
+      td(tr, nf.format(x.notN), 'r nn');
+      td(tr).append(progress(x.rate));
+    } else {
+      const m = manyTests(S.subj, S.sec, lvl, S.chap);
+      td(tr, nf.format(m.some.length), 'r tn');
+      td(tr, nf.format(m.noneN), 'r nn');
+      if (S.chap) td(tr).append(progress(m.avg));
+    }
+    link(tr, () => { update({ lvl }); goTop(); }, 'Open level \u203a');
+  });
+  if (!any) emptyRow(tb, 6, gradeHasBands(S.g)
+    ? 'No students in this selection.'
+    : `Grade ${S.g} is not in the school’s assessment export, so no achiever level is available for these students.`);
+}
+function drawSectionsSingle() {
+  $('pSections').textContent = 'Selected test, by section. Click a section to open it.';
+  header($('hdSections'), [['Section'], ['On roll', 'r'], ['Took', 'r'], ['Did not take', 'r'], ['Participation', '', '30%'], ['']]);
+  const tb = $('tSections'); tb.replaceChildren();
+  uniq(roster[S.g].map((s) => s.sec)).sort(secSort).forEach((sec) => {
+    const x = oneTest(S.subj, S.chap, S.test, sec, S.lvl);
+    const tr = tb.insertRow();
+    td(tr).append(el('b', null, 'Section ' + sec));
+    td(tr, nf.format(x.total), 'r');
+    td(tr, nf.format(x.took.length), 'r tn');
+    td(tr, nf.format(x.notN), 'r nn');
+    td(tr).append(progress(x.rate));
+    link(tr, () => { update({ sec }); goTop(); }, 'Open section ›');
+  });
+}
+function drawSectionsMany() {
+  $('pSections').textContent = `${S.subj || 'All subjects'}, all tests, by section. Click a section to open it.`;
+  header($('hdSections'), S.chap
+    ? [['Section'], ['On roll', 'r'], ['Attempted at least one', 'r'], ['Attempted none', 'r'], ['Average test participation', '', '30%'], ['']]
+    : [['Section'], ['On roll', 'r'], ['Chapters reached', 'r'], ['Attempted at least one', 'r'], ['Attempted none', 'r'], ['']]);
+  const tb = $('tSections'); tb.replaceChildren();
+  uniq(roster[S.g].map((s) => s.sec)).sort(secSort).forEach((sec) => {
+    const m = manyTests(S.subj, sec, S.lvl, S.chap);
+    const tr = tb.insertRow();
+    td(tr).append(el('b', null, 'Section ' + sec));
+    td(tr, nf.format(m.total), 'r');
+    if (!S.chap) td(tr, nf.format(chapsReached(S.subj, sec)), 'r');
+    td(tr, nf.format(m.some.length), 'r tn');
+    td(tr, nf.format(m.noneN), 'r nn');
+    if (S.chap) td(tr).append(progress(m.avg));
+    link(tr, () => { update({ sec }); goTop(); }, 'Open section ›');
+  });
+}
+function drawTests(tests) {
+  const tb = $('tTests'); tb.replaceChildren();
+  const showChap = !S.chap;
+  header($('hdTests'), showChap
+    ? [['Test'], ['Chapter'], ['Took', 'r'], ['Did not take', 'r'], ['Participation', '', '24%'], ['']]
+    : [['Test'], ['Took', 'r'], ['Did not take', 'r'], ['Participation', '', '28%'], ['']]);
+  const span = showChap ? 6 : 5;
+  let last = null;
+  tests.forEach(([subj, chap, test]) => {
+    if (!S.subj && subj !== last) { last = subj; const g = tb.insertRow(); g.className = 'grp'; const c = g.insertCell(); c.colSpan = span; c.textContent = subj; }
+    const x = oneTest(subj, chap, test);
+    const tr = tb.insertRow();
+    td(tr, test, 'wrapcell');
+    if (showChap) td(tr, chap || '—', 'wrapcell chapcell');
+    td(tr, nf.format(x.took.length), 'r tn');
+    td(tr, nf.format(x.notN), 'r nn');
+    td(tr).append(progress(x.rate));
+    link(tr, () => { update({ subj, chap, test }); goTop(); }, 'View students ›');
+  });
+  if (!tests.length) emptyRow(tb, span, 'No tests found for this selection.');
+}
+function attCell(tr, t) {
+  if (!t) return td(tr, '—', 'na');
+  const c = td(tr, null, 'att-td'), d = el('div', 'att');
+  d.append(el('b', null, String(t[1])), el('small', null, String(t[0])), el('small', null, 'Time: ' + t2(t[2]) + '%'));
+  c.append(d); return c;
+}
+function drawTook(took) {
+  const q = $('qTook').value.trim().toLowerCase(), tb = $('tTook'); tb.replaceChildren();
+  let i = 0;
+  took.filter((s) => !q || s.name.toLowerCase().includes(q)).forEach((s) => s.e.forEach((a, j) => {
+    const tr = tb.insertRow();
+    td(tr, j === 0 ? String(++i) : '', 'idx');
+    const nc = td(tr, null, 'wrapcell'); nc.append(el('span', null, s.name));
+    const norm = (x) => x.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (s.unlisted && j === 0) nc.append(el('span', 'note warn', 'Name as in the IBT file – not found in the class list'));
+    if (norm(a.orig) !== norm(a.test)) nc.append(el('span', 'note', `Recorded in the file as “${a.orig}”`));
+    td(tr, s.sec);
+    const lc = tr.insertCell(); if (j === 0 && !s.unlisted) lc.append(lvlTag(s));
+    td(tr, j === 0 && s.no ? String(s.no) : (j === 0 ? '–' : ''), 'c'); td(tr, String(a.ideal)); td(tr, String(a.n), 'c');
+    for (let k = 0; k < 3; k++) attCell(tr, a.tries[k]);
+  }));
+  if (!tb.rows.length) emptyRow(tb, 10, took.length ? 'No student matches that search.' : 'No student has taken this test yet.');
+}
+function drawNot(not, unnamed = 0) {
+  const q = $('qNot').value.trim().toLowerCase(), tb = $('tNot'); tb.replaceChildren();
+  not.filter((s) => !q || s.name.toLowerCase().includes(q)).forEach((s, i) => {
+    const tr = tb.insertRow(); td(tr, String(i + 1), 'idx'); td(tr, s.name, 'wrapcell'); td(tr, s.sec);
+    tr.insertCell().append(lvlTag(s));
+    td(tr, String(s.no), 'c');
+  });
+  if (!tb.rows.length && (q || !unnamed)) emptyRow(tb, 5, not.length ? 'No student matches that search.' : 'Every student has taken this test.');
+  if (unnamed > 0 && !q) {
+    const tr = tb.insertRow(); tr.className = 'unnamed';
+    const c = tr.insertCell(); c.colSpan = 5;
+    c.textContent = `${nf.format(unnamed)} student${unnamed > 1 ? 's' : ''} who took this test ${unnamed > 1 ? 'are' : 'is'} in the IBT file under a name not found in the class list, so one of the names above may be ${unnamed > 1 ? 'them' : 'that student'} under a different spelling.`;
+  }
+}
+$('qNot').oninput = () => { const x = oneTest(S.subj, S.chap, S.test); drawNot(x.not, x.unl); };
+
+/* ---------- pop-up with names ---------- */
+const pop = $('pop'); let popRows = [], popKind = 'took', popSingle = true, popTotal = 0, popUnnamed = 0;
+function openPop(kind) {
+  popMode = 'list';
+  popKind = kind; popSingle = !ALL_TESTS();
+  let title;
+  if (popSingle) {
+    const { all, took, not } = oneTest(S.subj, S.chap, S.test), done = new Set(took.map(key));
+    popRows = kind === 'took' ? took : kind === 'not' ? not : all.map((s) => ({ ...s, done: done.has(key(s)) }));
+    title = kind === 'took' ? 'Students who took the test' : kind === 'not' ? 'Students who did not take the test' : 'All students';
+    const o = oneTest(S.subj, S.chap, S.test); popUnnamed = 0;
+    $('pSub').textContent = `${where()} · ${S.subj} · ${S.test} · ${nf.format(kind === 'took' ? took.length : kind === 'not' ? o.notN : o.total)} students`;
+  } else {
+    const m = manyTests(); popTotal = m.tests.length;
+    popRows = kind === 'took' ? m.some : kind === 'not' ? m.none : m.all;
+    title = kind === 'took' ? 'Students who attempted at least one test' : kind === 'not' ? 'Students who attempted no test' : 'All students';
+    popUnnamed = 0;
+    $('pSub').textContent = `${where()} · ${S.subj || 'All subjects'} · ${nf.format(popTotal)} tests · ${nf.format(kind === 'took' ? m.some.length : kind === 'not' ? m.noneN : m.total)} students`;
+  }
+  $('pTitle').textContent = title;
+  $('pq').value = ''; drawPop(); pop.showModal();
+}
+function drawPop() {
+  const q = $('pq').value.trim().toLowerCase(), b = $('pBody'); b.replaceChildren();
+  const rows = popRows.filter((s) => !q || s.name.toLowerCase().includes(q));
+  rows.forEach((s) => {
+    const d = el('div', 'stu'); d.append(el('div', null, s.name));
+    const bv = s.unlisted ? null : bandOf(s);
+    let right = 'Section ' + s.sec + (bv ? ' · ' + TAG[bv] : '') + (s.no ? ' · Roll ' + s.no : '') + (s.unlisted ? ' · name not in class list' : '');
+    if (popSingle) {
+      if (s.e) right += ' · Marks: ' + s.e.flatMap((a) => a.tries.map((t) => t[1])).join(', ');
+      if (popKind === 'all') right += s.done ? ' · Taken' : ' · Not taken';
+    } else right += ` · ${s.count} of ${popTotal} tests attempted`;
+    d.append(el('span', null, right)); b.append(d);
+  });
+  if (!rows.length && (q || !popUnnamed)) b.append(el('div', 'mempty', popRows.length ? 'No student matches that search.' : 'No students in this list.'));
+  if (popUnnamed > 0 && !q) b.append(el('div', 'unnamed-note', `+ ${nf.format(popUnnamed)} more student${popUnnamed > 1 ? 's' : ''} on roll with no record in the IBT export. Their names are not in the uploaded files.`));
+}
+document.querySelectorAll('[data-pop]').forEach((x) => (x.onclick = () => openPop(x.dataset.pop)));
+$('pq').oninput = () => (popMode === 'cross' ? crossDraw() : drawPop());
+$('pClose').onclick = () => pop.close();
+pop.onclick = (e) => { if (e.target === pop) pop.close(); };
+
+/* ---------- downloads ---------- */
+const today = () => new Date().toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+const safe = (s) => s.replace(/[^A-Za-z0-9]+/g, '_').replace(/^_|_$/g, '');
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => (t.hidden = true), 3200); }
+function save(blob, name) {
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = name; a.rel = 'noopener'; document.body.append(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 4000);
+  toast('Downloading ' + name);
+}
+const scopeTag = () => `Grade${S.g}_` + (S.sec ? 'Section_' + S.sec : 'All_sections') + (S.lvl ? '_' + TAG[S.lvl] : '');
+const HEAD = DATA.HEAD;
+const SCHOOL = ['School Name', "Metropolitan International Indian Private School, Umm Al Quwain"];
+
+$('dlBtn').onclick = () => {
+  const m = DATA.META[S.g];
+  const rows = DATA.RAW[S.g].filter((r) => !S.sec || r[1] === S.sec);
+  const blob = XL.workbook({
+    sheetName: `Grade ${S.g} ${S.sec || 'All'} raw`,
+    title: 'Test Attempts Report – Raw data',
+    info: [SCHOOL, ['Grade', m.gradeLabel], ['Section', S.sec || 'All sections'], ['Package', m.package], ['Subject', m.subject],
+           ['Source file', m.file], ['Date of download', m.downloaded], ['Rows', rows.length]],
+    header: HEAD, rows,
+    widths: [34, 9, 13, 48, 14, 10, 13, 14, 12, 13, 14, 12, 13, 14, 12],
+  });
+  save(blob, `Test_Attempts_Raw_Data_Grade_${S.g}_${S.sec ? 'Section_' + S.sec : 'All_Sections'}.xlsx`);
+};
+
+
+/* ---------- Grade 9 students who attempted Grade 8 tests ---------- */
+const crossRows = () => (DATA.X || []).filter((x) => x.g === S.g && (!S.sec || x.sec === S.sec) && (!S.subj || x.subj === S.subj));
+function drawCross() {
+  const rows = crossRows(), box = $('xnote');
+  box.hidden = !rows.length || !!S.test;
+  if (box.hidden) return;
+  const studs = uniq(rows.map((x) => x.name)).length, from = uniq(rows.map((x) => x.from)).join(', ');
+  $('xtitle').textContent = `${studs} student${studs > 1 ? 's' : ''} also attempted ${rows.length} Grade ${from} test${rows.length > 1 ? 's' : ''}`;
+}
+function openCross() {
+  const rows = crossRows();
+  popMode = 'cross';
+  const froms = uniq(rows.map((x) => x.from)).join(', ');
+  $('pTitle').textContent = `Grade ${froms} tests attempted by Grade ${S.g} students`;
+  $('pSub').textContent = `${where()} · ${S.subj || 'All subjects'} · listed in the Grade ${froms} file, not counted in Grade ${S.g} figures`;
+  $('pq').value = '';
+  const b = $('pBody'), q = () => $('pq').value.trim().toLowerCase();
+  const draw = () => {
+    b.replaceChildren();
+    rows.filter((x) => !q() || x.name.toLowerCase().includes(q())).forEach((x) => {
+      const r = el('div', 'xrow'), who = el('div', 'who');
+      who.append(el('div', null, x.name), el('span', null, `Section ${x.sec} · Ideal time ${x.ideal} · ${x.n} attempt${x.n > 1 ? 's' : ''}`));
+      const atts = el('div', 'atts');
+      x.tries.forEach((t, i) => { const a = el('div', 'att'); a.append(el('small', null, 'Attempt ' + (i + 1)), el('b', null, String(t[1])), el('small', null, String(t[0])), el('small', null, 'Time: ' + t2(t[2]) + '%')); atts.append(a); });
+      r.append(who, el('div', 'what', `Grade ${x.from} · ${x.subj} · ${x.test}`), atts);
+      b.append(r);
+    });
+    if (!b.children.length) b.append(el('div', 'mempty', 'No student matches that search.'));
+  };
+  crossDraw = draw; draw(); pop.showModal();
+}
+let popMode = 'list', crossDraw = null;
+$('xbtn').onclick = openCross;
+
+update({});
+
+
+
+/* ================================================================ teacher views */
+const T = DATA.T;
+const tnf = new Intl.NumberFormat('en-GB');
+const tpc = (x) => (x * 100).toFixed(0) + '%';
+const tel = (t, c, txt) => { const e = document.createElement(t); if (c) e.className = c;
+  if (txt != null) e.textContent = txt; return e; };
+const ttd = (tr, txt, c) => { const d = tr.insertCell(); if (c) d.className = c;
+  if (txt != null) d.textContent = txt; return d; };
+function tbar(share, colour) {
+  const w = tel('div', 'bar'), t = tel('div', 'trk'), v = tel('div', 'val');
+  v.style.width = Math.max(0, Math.min(1, share)) * 100 + '%';
+  if (colour) v.style.background = colour;
+  t.append(v); w.append(t, tel('b', null, tpc(share)));
+  return w;
+}
+/* Five ordered bands, so one hue stepped light to dark rather than five competing colours. */
+const TBANDS = [
+  ['Outstanding', 90, 101, '#1B3F7A'],
+  ['Very Good',   80,  90, '#3C62A6'],
+  ['Good',        70,  80, '#6D8FC8'],
+  ['Acceptable',  60,  70, '#A9BEE0'],
+  ['Weak',         0,  60, '#DCE4F2'],
+];
+const tband = (p) => TBANDS.find(([, lo, hi]) => p >= lo && p < hi) || TBANDS[4];
+const tsvg = (tag, attrs, txt) => {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (txt != null) e.textContent = txt;
+  return e;
+};
+const ttip = tel('div', 'ttip'); ttip.style.cssText =
+  'position:fixed;z-index:60;display:none;pointer-events:none;background:var(--ink);color:#fff;'
+  + 'padding:9px 12px;border-radius:10px;font-size:12.5px;line-height:1.5;box-shadow:0 6px 20px rgba(0,0,0,.18)';
+document.body.append(ttip);
+function thover(node, html) {
+  node.addEventListener('pointerenter', (e) => { ttip.innerHTML = html(); ttip.style.display = 'block'; mv(e); });
+  node.addEventListener('pointermove', mv);
+  node.addEventListener('pointerleave', () => { ttip.style.display = 'none'; });
+  function mv(e) {
+    ttip.style.left = Math.min(e.clientX + 14, innerWidth - ttip.offsetWidth - 8) + 'px';
+    ttip.style.top = Math.max(8, e.clientY - ttip.offsetHeight - 14) + 'px';
+  }
+}
+
+/* ---- EduBrisk usage */
+const TU = (T.U || []).slice().sort((a, b) => (b[2] || 0) - (a[2] || 0));
+const TUact = TU.filter((t) => t[2] > 0);
+const TUhrs = TUact.reduce((a, t) => a + t[2], 0);
+$('kTea').textContent = tnf.format(TU.length);
+$('kAct').textContent = tnf.format(TUact.length);
+$('kIdle').textContent = tnf.format(TU.length - TUact.length);
+$('kHrs').textContent = tnf.format(Math.round(TUhrs));
+[['None recorded', (v) => !v], ['Under 1 hour', (v) => v > 0 && v < 1],
+ ['1 to 10 hours', (v) => v >= 1 && v < 10], ['10 to 50 hours', (v) => v >= 10 && v < 50],
+ ['50 hours or more', (v) => v >= 50]].forEach(([label, test]) => {
+  const n = TU.filter((t) => test(t[2])).length;
+  const tr = $('tDist').insertRow();
+  ttd(tr).append(tel('b', null, label));
+  ttd(tr, tnf.format(n), 'r');
+  ttd(tr).append(tbar(n / TU.length, label === 'None recorded' ? 'var(--not)' : 'var(--accent)'));
+});
+const tTop5 = TUact.slice(0, 5).reduce((a, t) => a + t[2], 0);
+$('defDist').textContent = TUhrs
+  ? `The five heaviest accounts hold ${Math.round(tTop5)} of the ${Math.round(TUhrs)} recorded hours`
+    + ` — ${tpc(tTop5 / TUhrs)} of all teacher usage at this school.`
+  : '';
+$('nTea').textContent = tnf.format(TU.length);
+const tMax = Math.max(...TU.map((t) => t[2] || 0), 1);
+function drawTeaUse(q = '') {
+  const tb = $('tTea'); tb.replaceChildren();
+  const needle = q.trim().toLowerCase();
+  const rows = TU.filter((t) => !needle || (t[0] || '').toLowerCase().includes(needle)
+    || (t[1] || '').toLowerCase().includes(needle));
+  rows.forEach((t, i) => {
+    const tr = tb.insertRow();
+    ttd(tr, String(i + 1), 'idx');
+    ttd(tr).append(tel('b', null, t[0] || '—'));
+    ttd(tr, t[1] || '—');
+    const c = ttd(tr, t[2] ? t[2].toFixed(2) : 'not recorded', 'r');
+    if (!t[2]) c.style.color = 'var(--faint)';
+    ttd(tr).append(tbar((t[2] || 0) / tMax, t[2] ? 'var(--accent)' : 'var(--track)'));
+  });
+  if (!rows.length) {
+    const tr = tb.insertRow(); const c = tr.insertCell();
+    c.colSpan = 5; c.style.color = 'var(--faint)'; c.textContent = 'No teacher matches that search.';
+  }
+}
+drawTeaUse();
+$('qTea').oninput = (e) => drawTeaUse(e.target.value);
+
+/* ---- TeachScope */
+(function () {
+  const R = T.R || [];
+  if (!R.length) return;
+  const n = R.length;
+  const obs = R.reduce((a, r) => a + r[1], 0);
+  const avg = R.reduce((a, r) => a + r[2], 0) / n;
+  const vg = R.filter((r) => r[2] >= 80).length;
+  $('kTsN').textContent = tnf.format(n);
+  $('kTsO').textContent = tnf.format(obs);
+  $('kTsA').textContent = avg.toFixed(1) + '%';
+  $('kTsV').textContent = `${vg} · ${tpc(vg / n)}`;
+  $('tsSub').textContent = `${T.META.basis} · ${T.META.filter} · captured ${T.META.captured}`;
+  const partial = T.META.partial && T.META.counter && T.META.counter > n;
+  $('tsNote').textContent = (partial
+    ? `The school has ${tnf.format(T.META.counter)} teachers on TeachScope, but the capture this report is built`
+      + ` from holds ${tnf.format(n)} of them — the platform has no export, and its summary table was cut short.`
+      + ` The ${T.META.counter - n} missing teachers are not missing from the school, so every figure below`
+      + ` describes those ${tnf.format(n)} and should not be read as the whole staff. `
+    : `All ${tnf.format(n)} teachers on the platform have an accepted observation, so this is a complete picture`
+      + ` of where the school starts rather than a sample. `)
+    + `Too few teachers have been observed twice for any movement to be read from the data, so no trend is shown`
+    + ` — a figure drawn from a handful of repeat observations would invite a conclusion the data cannot support.`;
+  if (partial) $('tsHead').textContent = 'A partial capture, and a baseline.';
+
+  const svg = $('cBands'); svg.replaceChildren();
+  const W = 860, BH = 34, Y = 16;
+  let x = 0;
+  TBANDS.forEach(([label, lo, hi, col]) => {
+    const c = R.filter((r) => r[2] >= lo && r[2] < hi).length;
+    if (!c) return;
+    const w = (c / n) * W;
+    const rect = tsvg('rect', { x: x + 1, y: Y, width: Math.max(0, w - 2), height: BH, rx: 4, fill: col });
+    thover(rect, () => `<b>${label}</b>${c} teacher${c === 1 ? '' : 's'} · ${tpc(c / n)}`);
+    svg.append(rect);
+    if (w > 54) svg.append(tsvg('text', { x: x + w / 2, y: Y + BH + 20, 'text-anchor': 'middle',
+      fill: 'var(--muted)', 'font-size': 12 }, `${label} ${tpc(c / n)}`));
+    x += w;
+  });
+
+  const bb = $('tTsBands');
+  TBANDS.forEach(([label, lo, hi, col]) => {
+    const c = R.filter((r) => r[2] >= lo && r[2] < hi).length;
+    const tr = bb.insertRow();
+    const pill = tel('span', 'bd', label); pill.style.setProperty('--c', col);
+    ttd(tr).append(pill);
+    ttd(tr, hi > 100 ? lo + '% and above' : (lo ? lo + '–' + (hi - 1) + '%' : 'below ' + hi + '%'));
+    ttd(tr, tnf.format(c), 'r');
+    ttd(tr).append(tbar(c / n, col));
+  });
+
+  const rows = (T.P || []).map(([name, dom, O, VG, G, A, Wk]) => {
+    const tot = O + VG + G + A + Wk;
+    return { name, good: O + VG + G, weak: Wk, tot, share: tot ? (O + VG + G) / tot : 0 };
+  }).sort((a, b) => b.share - a.share);
+  const pb = $('tTsParam');
+  rows.forEach((r) => {
+    const tr = pb.insertRow();
+    ttd(tr).append(tel('b', null, r.name));
+    ttd(tr, `${r.good} of ${r.tot}`, 'r');
+    ttd(tr, String(r.weak), 'r');
+    ttd(tr).append(tbar(r.share));
+  });
+
+  $('nTsT').textContent = tnf.format(n);
+  function drawTsTea(q = '') {
+    const body = $('tTsTea'); body.replaceChildren();
+    const needle = q.trim().toLowerCase();
+    const list = R.filter((r) => !needle || r[0].toLowerCase().includes(needle));
+    list.forEach((r, i) => {
+      const tr = body.insertRow();
+      ttd(tr, String(i + 1), 'idx');
+      ttd(tr).append(tel('b', null, r[0]));
+      ttd(tr, String(r[1]), 'r');
+      ttd(tr, r[2] + '%', 'r');
+      const b = tband(r[2]);
+      const pill = tel('span', 'bd', b[0]); pill.style.setProperty('--c', b[3]);
+      ttd(tr).append(pill);
+      ttd(tr).append(tbar(r[2] / 100, b[3]));
+    });
+    if (!list.length) {
+      const tr = body.insertRow(); const c = tr.insertCell();
+      c.colSpan = 6; c.style.color = 'var(--faint)'; c.textContent = 'No teacher matches that search.';
+    }
+  }
+  drawTsTea();
+  $('qTs').oninput = (e) => drawTsTea(e.target.value);
+})();
+
+/* ---- switching */
+let ROLE_STUDENT = true;
+function setRole(student) {
+  ROLE_STUDENT = student;
+  $('rStu').setAttribute('aria-pressed', String(student));
+  $('rTea').setAttribute('aria-pressed', String(!student));
+  $('paneTeacher').hidden = student;
+  document.querySelector('.filters').hidden = !student;
+  document.querySelectorAll('main.wrap > .block').forEach((b) => { if (student) return; b.hidden = true; });
+  $('roleHint').textContent = student
+    ? ''
+    : `${tnf.format((T.R || []).length)} teachers observed on TeachScope of ${tnf.format(TU.length)} EduBrisk accounts`;
+  ttip.style.display = 'none';
+  if (student) render();
+  else renumber();
+}
+function renumber() {
+  let n = 0;
+  document.querySelectorAll('.block').forEach((b) => {
+    if (!b.hidden && !b.closest('[hidden]')) b.querySelector('h2').dataset.n = ++n;
+  });
+}
+function setSource(eb) {
+  $('sEB').setAttribute('aria-pressed', String(eb));
+  $('sTS').setAttribute('aria-pressed', String(!eb));
+  $('paneEB').hidden = !eb;
+  $('paneTS').hidden = eb;
+  $('srcHint').textContent = eb
+    ? 'Hours recorded on the EduBrisk platform'
+    : 'Lesson observation quality, from TeachScope';
+  ttip.style.display = 'none';
+  renumber();
+}
+$('rStu').onclick = () => setRole(true);
+$('rTea').onclick = () => setRole(false);
+$('sEB').onclick = () => setSource(true);
+$('sTS').onclick = () => setSource(false);
+setSource(true);
+setRole(true);
+</script>
+</body>
+</html>
